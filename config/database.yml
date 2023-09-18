@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: jam_jackpot_production
-  username: jam_jackpot
-  password: <%= ENV["JAM_JACKPOT_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
