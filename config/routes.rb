@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :giveaways
 
 
-  # resources :entries
-  # resources :prizes
-  # resources :users
+  resources :entries
+  resources :prizes
+  resources :users
   
 
 
