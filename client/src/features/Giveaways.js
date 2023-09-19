@@ -1,6 +1,10 @@
+// Giveaways.js
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGiveaways } from './giveawaysSlice';
+import { ClipLoader } from 'react-spinners';
+import GiveawayList from './GiveawayList';
 
 function Giveaways() {
   const dispatch = useDispatch();
@@ -8,22 +12,23 @@ function Giveaways() {
   useEffect(() => {
     dispatch(fetchGiveaways());
   }, [dispatch]);
-
-  const giveaways = useSelector((state) => state.giveaways.entities);
+  
   const loading = useSelector((state) => state.giveaways.status === 'loading');
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className='loading-spinner-container'>
+        <div className='loading-spinner'>
+          <ClipLoader loading={loading} size={150} color={'#123abc'} />
+        </div>
+      </div>
+    );
   }
 
   return (
     <div>
-      <h1>Hello World!</h1>
-      <ul>
-        {giveaways.map((giveaway) => (
-          <li key={giveaway.id} className='left-aligned' >{giveaway.title}</li>
-        ))}
-      </ul>
+      <h1>Upcoming Giveaways</h1>
+      <GiveawayList />
     </div>
   );
 }

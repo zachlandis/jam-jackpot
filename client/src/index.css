@@ -1,3 +1,53 @@
 .left-aligned {
   text-align: left;
 }
+
+.loading-spinner-container {
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  height: 100px; 
+}
+
+.giveawayList-div {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+    background-color: #e0e0e0;
+  }
+}
+
+.giveawayList-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.column:last-child {
+  margin-right: 0;
+}
+
+.poster-column {
+  flex: 0 0 25%; /* Set a fixed width of 25% */
+}
+
+.poster img {
+  max-width: 100%; /* Ensure the image fits within the column */
+}
