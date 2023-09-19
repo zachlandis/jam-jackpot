@@ -20,7 +20,7 @@ function GiveawayList() {
         </div>
         <div className="column">
             <p><strong>Total Entries:</strong> {giveaway.total_entries}</p>
-            <Link to={`giveaway/${giveaway.id}`}>
+            <Link to={`/giveaways/${giveaway.id}`}>
                 Enter Giveaway
             </Link>
         </div>

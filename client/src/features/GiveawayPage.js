@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import GiveawayEntries from './GiveawayEntries';
+import { fetchGiveaways } from './giveawaysSlice';
+import { ClipLoader } from 'react-spinners';
 
 function GiveawayPage() {
-    const [entries, setEntries] = useState(0)
-
     
     const { id } = useParams(); // Access the 'id' parameter from the URL
     const giveawayId = parseInt(id);
     const giveaways = useSelector((state) => state.giveaways.entities);
     const giveaway = giveaways.find((g) => g.id === giveawayId);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(fetchGiveaways()); // Dispatch the action to fetch giveaways data
+    }, [dispatch]);
+
+    const loading = useSelector((state) => state.giveaways.status === 'loading');
+
+    if (loading) {
+        return (
+        <div className='loading-spinner-container'>
+            <div className='loading-spinner'>
+            <ClipLoader loading={loading} size={150} color={'#123abc'} />
+            </div>
+        </div>
+        );
+    }
 
     if (!giveaway) {
         return <div>Giveaway not found</div>;
