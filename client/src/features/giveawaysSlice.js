@@ -6,6 +6,25 @@ export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", () =>
     .then((giveaway) => giveaway);
 });
 
+// giveawaysSlice.js
+
+export const createGiveaway = createAsyncThunk("giveaways/createGiveaway", async (formData) => {
+  const response = await fetch("/giveaways", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create giveaway");
+  }
+
+  return response.json();
+});
+
+
 const initialState = {
   entities: [],
   status: "idle",
@@ -22,7 +41,6 @@ const giveawaysSlice = createSlice({
       const giveaway = state.entities.find(
         (giveaway) => giveaway.id === action.payload.id
       );
-      giveaway.title = action.payload.title;
     },
   },
   extraReducers: {
@@ -32,6 +50,9 @@ const giveawaysSlice = createSlice({
     [fetchGiveaways.fulfilled](state, action) {
         state.entities = action.payload;
         state.status = "idle";
+    },
+    [createGiveaway.fulfilled]: (state, action) => {
+      state.entities.push(action.payload);
     },
   },
 });

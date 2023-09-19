@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import GiveawayEntries from './GiveawayEntries';
-import { fetchGiveaways } from './giveawaysSlice';
 import { ClipLoader } from 'react-spinners';
+
+import { fetchGiveaways } from './giveawaysSlice';
+
 
 function GiveawayPage() {
     

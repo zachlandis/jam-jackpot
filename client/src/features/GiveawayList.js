@@ -1,11 +1,22 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { giveawayUpdated } from './giveawaysSlice';
 
 function GiveawayList() {
   const giveaways = useSelector((state) => state.giveaways.entities);
 
-  // Function to format the date
+  // const dispatch = useDispatch();
+
+  // function handleTitleUpdate(giveaway) {
+  //   const giveawayId = giveaway.id
+  //   const updatedData = {
+  //     id: giveawayId,
+  //   }
+  //   dispatch(giveawayUpdated)
+  // }
+
+// FORMAT DATE
   function formatDate(dateString) {
     const options = {
       weekday: 'long',
@@ -18,17 +29,16 @@ function GiveawayList() {
 
     return localDate.toLocaleDateString(undefined, options);
   }
-
-  // Map the giveaways and format the date outside of the return
   const giveawayElements = giveaways.map((giveaway) => {
     const formattedDate = formatDate(giveaway.event_date);
+    console.log(giveaway)
 
     return (
       <div key={giveaway.id} className='left-aligned'>
         <div className='giveawayList-div'>
           <div className="column">
             <h2>{giveaway.title}</h2>
-            <p><strong>Date:</strong> {formattedDate}</p>
+            <p><strong>Date:</strong> {giveaway.event_date}</p>
             <p><strong>Venue:</strong> {giveaway.event_venue}</p>
             <p><strong>Location:</strong> {giveaway.event_location}</p>
           </div>
@@ -37,6 +47,7 @@ function GiveawayList() {
             <Link to={`/giveaways/${giveaway.id}`}>
               Enter Giveaway
             </Link>
+            <button>Update Giveaway</button>
           </div>
           <div className="poster-column">
             <div className="poster">
