@@ -58,10 +58,6 @@
 /* GiveawayPage.css */
 
 .giveaway-page {
-  background-color: #f98e31; /* Background color */
-  padding: 20px; /* Padding around the details */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -70,6 +66,10 @@
 
 .giveaway-details {
   flex: 1;
+  background-color: #f98e31; /* Background color */
+  padding: 20px; /* Padding around the details */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
 }
 
 .giveaway-title {
@@ -109,4 +109,10 @@
   font-size: 24px;
   text-align: center;
   margin-top: 20px;
+}
+
+/* Giveaway Entries */
+
+.giveaway-entries {
+  text-align: center;
 }
