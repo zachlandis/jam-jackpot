@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function GiveawayList() {
   const giveaways = useSelector((state) => state.giveaways.entities);
@@ -19,7 +20,9 @@ function GiveawayList() {
         </div>
         <div className="column">
             <p><strong>Total Entries:</strong> {giveaway.total_entries}</p>
-            <button>See More</button>
+            <Link to={`giveaway/${giveaway.id}`}>
+                Enter Giveaway
+            </Link>
         </div>
         <div className="poster-column">
             <div className="poster">
