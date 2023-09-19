@@ -82,6 +82,8 @@
 }
 
 
+
+
 /* GiveawayPage.css */
 
 .giveaway-page {
@@ -111,21 +113,6 @@
   text-align: center;
 }
 
-.giveaway-entry {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.enter-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .giveaway-poster {
   flex: 0 0 25%;
   margin-left: 20px;
@@ -140,11 +127,16 @@
 
 /* GiveawayEntries.css */
 
+.entries-counter {
+  text-align: center;
+  font-size: 30px;
+}
+
 .giveaway-entry-container {
   display: flex;
   align-items: center; /* Center vertically */
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0px;
   margin-bottom: 10px;
 }
 

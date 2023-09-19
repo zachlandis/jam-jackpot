@@ -20,6 +20,16 @@ function GiveawayPage() {
 
     const loading = useSelector((state) => state.giveaways.status === 'loading');
 
+    function formatDate(dateString) {
+        const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+        const utcDate = new Date(dateString);
+        const localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
+      
+        return localDate.toLocaleDateString(undefined, options);
+      }
+
+    const formattedDate = formatDate(giveaway.event_date)
+
     if (loading) {
         return (
         <div className='loading-spinner-container'>
@@ -40,7 +50,7 @@ function GiveawayPage() {
             <div className="giveaway-details">
                 <h1 className="giveaway-title">{giveaway.title}</h1>
                 <div className="giveaway-info">
-                <p><strong>Date:</strong> {giveaway.event_date}</p>
+                <p><strong>Date:</strong> {formattedDate}</p>
                 <p><strong>Venue:</strong> {giveaway.event_venue}</p>
                 <p><strong>Location:</strong> {giveaway.event_location}</p>
                 </div>
