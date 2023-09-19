@@ -13,6 +13,33 @@
   height: 100px; 
 }
 
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333; /* Set the background color as needed */
+  padding: 10px;
+  color: white; /* Set the text color as needed */
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px; /* Adjust the spacing between links as needed */
+  
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white; /* Set the link text color as needed */
+}
+
+
+
+
+
+
 /* GiveawayList.css */
 
 .giveawayList-div {
@@ -119,12 +146,12 @@
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
-  
 }
 
 .giveaway-entry-column {
   flex: 1;
   margin-right: 20px;
+  justify-content: space-between;
 }
 
 .giveaway-entry-iframe {

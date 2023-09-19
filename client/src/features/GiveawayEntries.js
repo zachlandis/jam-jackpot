@@ -40,7 +40,7 @@ function GiveawayEntries() {
                 <h4>Follow Party Guru Productions on Facebook</h4>
             </div>
             <div className="giveaway-entry-column">
-                <a href="https://www.instagram.com/your-instagram-page/" target="_blank" className="instagram-button">
+                <a href="https://www.instagram.com/partyguruproductions/" target="_blank" className="instagram-button">
                     <img src="https://www.edigitalagency.com.au/wp-content/uploads/new-Instagram-logo-png-full-colour-glyph.png" alt="Instagram Logo" />
                 </a>
             </div>
