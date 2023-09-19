@@ -13,6 +13,8 @@
   height: 100px; 
 }
 
+/* GiveawayList.css */
+
 .giveawayList-div {
   background-color: #f0f0f0;
   border: 1px solid #ddd;
@@ -50,4 +52,61 @@
 
 .poster img {
   max-width: 100%; /* Ensure the image fits within the column */
+}
+
+
+/* GiveawayPage.css */
+
+.giveaway-page {
+  background-color: #f98e31; /* Background color */
+  padding: 20px; /* Padding around the details */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.giveaway-details {
+  flex: 1;
+}
+
+.giveaway-title {
+  font-size: 40px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.giveaway-info {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.giveaway-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.enter-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.giveaway-poster {
+  flex: 0 0 25%;
+  margin-left: 20px;
+  max-width: 25%;
+}
+
+.giveaway-not-found {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
 }

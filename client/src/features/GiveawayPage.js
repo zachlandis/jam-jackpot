@@ -16,19 +16,18 @@ function GiveawayPage() {
     // Handle case where giveaway is not found
     return <div>Giveaway not found</div>;
   }
-
-  console.log(giveaways);
   
   return (
-    <div>
-      <h1>{giveaway.title}</h1>
-      {/* Display giveaway details */}
-      <p>Date: {giveaway.event_date}</p>
-      <p>Venue: {giveaway.event_venue}</p>
-      <p>Location: {giveaway.event_location}</p>
-      <p>Total Entries: {giveaway.total_entries}</p>
-      <button>Enter Giveaway</button>
-      {/* Add more details or components as needed */}
+    <div className="giveaway-page">
+      <div className="giveaway-details">
+        <h1 className="giveaway-title">{giveaway.title}</h1>
+        <div className="giveaway-info">
+          <p><strong>Date:</strong> {giveaway.event_date}</p>
+          <p><strong>Venue:</strong> {giveaway.event_venue}</p>
+          <p><strong>Location:</strong> {giveaway.event_location}</p>
+        </div>
+      </div>
+      <img src={giveaway.event_poster} alt={giveaway.title} className="giveaway-poster" />
     </div>
   );
 }
