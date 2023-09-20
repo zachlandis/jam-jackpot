@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./AdminEntries";
@@ -8,10 +8,15 @@ import AdminUsers from "./Users/AdminUsers";
 import CreateGiveaway from "./Giveaway/CreateGiveaway";
 
 function AdminDash() {
-    const [activeButton, setActiveButton] = useState('allGiveaways')
+    const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allGiveaways');
+
+    useEffect(() => {
+        // Save the active button name to localStorage when it changes
+        localStorage.setItem('activeButton', activeButton);
+    }, [activeButton]);
 
     function onButtonClick(buttonName) {
-        setActiveButton(buttonName)
+        setActiveButton(buttonName);
     }
 
     return (
@@ -53,9 +58,8 @@ function AdminDash() {
             {activeButton === 'allPrizes' && <AdminPrizes />}
             {activeButton === 'allEntries' && <AdminEntries />}
             {activeButton === 'newGiveaway' && <CreateGiveaway />}
-
         </div>
-    )
+    );
 }
 
 export default AdminDash;
