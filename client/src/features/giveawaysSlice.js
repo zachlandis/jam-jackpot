@@ -1,12 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+
+
+// READ
 
 export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", () => {
   return fetch("/giveaways")
-    .then((r) => r.json())
-    .then((giveaway) => giveaway);
+  .then((r) => r.json())
+  .then((giveaway) => giveaway);
 });
 
-// giveawaysSlice.js
+// CREATE
 
 export const createGiveaway = createAsyncThunk("giveaways/createGiveaway", async (formData) => {
   const response = await fetch("/giveaways", {
@@ -16,13 +20,36 @@ export const createGiveaway = createAsyncThunk("giveaways/createGiveaway", async
     },
     body: JSON.stringify(formData),
   });
-
+  
   if (!response.ok) {
     throw new Error("Failed to create giveaway");
   }
-
+  
   return response.json();
 });
+
+// DELETE
+
+export const deleteGiveaway = createAsyncThunk(
+  'giveaways/deleteGiveaway',
+  async (itemId, {dispatch}) => {
+    try {
+      const response = await fetch(`/giveaways/${itemId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete item');
+      }
+      dispatch(fetchGiveaways());
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+      throw error;
+    }
+  }
+);
+
+
 
 
 const initialState = {
@@ -36,6 +63,9 @@ const giveawaysSlice = createSlice({
   reducers: {
     giveawayAdded(state, action) {
       state.entities.push(action.payload);
+    },
+    giveawayDeleted(state, action) {
+      state.entities = state.entities.filter((giveaway) => giveaway.id !== action.payload)
     },
     giveawayUpdated(state, action) {
       const giveaway = state.entities.find(
@@ -53,6 +83,9 @@ const giveawaysSlice = createSlice({
     },
     [createGiveaway.fulfilled]: (state, action) => {
       state.entities.push(action.payload);
+    },
+    [deleteGiveaway.fulfilled]: (state, action) => {
+      state.entities = state.entities.filter((giveaway) => giveaway.id !== action.payload)
     },
   },
 });

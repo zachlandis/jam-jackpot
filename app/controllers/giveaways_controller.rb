@@ -10,6 +10,11 @@ class GiveawaysController < ApplicationController
         render json: giveaway
     end
 
+    def destroy
+        giveaway = Giveaway.find(params[:id])
+        giveaway.destroy
+    end
+
     private
     
     def giveaway_params

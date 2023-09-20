@@ -6,17 +6,6 @@ import { giveawayUpdated } from './giveawaysSlice';
 function GiveawayList() {
   const giveaways = useSelector((state) => state.giveaways.entities);
 
-  // const dispatch = useDispatch();
-
-  // function handleTitleUpdate(giveaway) {
-  //   const giveawayId = giveaway.id
-  //   const updatedData = {
-  //     id: giveawayId,
-  //   }
-  //   dispatch(giveawayUpdated)
-  // }
-
-// FORMAT DATE
   function formatDate(dateString) {
     const options = {
       weekday: 'long',
@@ -47,7 +36,6 @@ function GiveawayList() {
             <Link to={`/giveaways/${giveaway.id}`}>
               Enter Giveaway
             </Link>
-            <button>Update Giveaway</button>
           </div>
           <div className="poster-column">
             <div className="poster">

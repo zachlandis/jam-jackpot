@@ -5,12 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGiveaways } from './giveawaysSlice';
 import { ClipLoader } from 'react-spinners';
 import GiveawayList from './GiveawayList';
-import CreateGiveaway from './CreateGiveaway';
 
 function Giveaways() {
-  const [isCreateFormVisible, setIsCreateFormVisible] = useState(false)
-  
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,8 +27,6 @@ function Giveaways() {
 
   return (
     <div>
-      {isCreateFormVisible ? <CreateGiveaway /> : null}
-      <button onClick={() => setIsCreateFormVisible(!isCreateFormVisible)}>New Giveaway</button>
       <h1>Upcoming Giveaways</h1>
       <GiveawayList />
     </div>

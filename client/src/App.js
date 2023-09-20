@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import './index.css';
+
+
+
 import Giveaways from './features/Giveaways';
 import GiveawayPage from './features/GiveawayPage';
-import GiveawayList from './features/GiveawayList';
 import Home from './features/Home';
 import NavBar from './features/NavBar';
+import AdminDash from './features/AdminDash';
 
 function App() {
   const [page, setPage] = useState("/")
@@ -20,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/giveaways/:id" element={<GiveawayPage />} />
           <Route path="/giveaways" element={<Giveaways />} />
+          <Route path="/admin" element={ <AdminDash />}/>
           <Route path='/' element={ <Home /> } />
         </Routes>
       </Router>

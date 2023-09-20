@@ -7,6 +7,7 @@ function NavBar() {
       <div className="navbar-links">
         <Link to="/">Home</Link>
         <Link to="/giveaways">Giveaways</Link>
+        <Link to="/admin">Admin</Link>
       </div>
     </nav>
   );
