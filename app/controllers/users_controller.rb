@@ -13,10 +13,15 @@ class UsersController < ApplicationController
     end
 
     def update
-        user.update(user_params)
-        render json: user
-        head :no_content
+        @user = User.find(params[:id])
+        
+        if @user.update(user_params)
+            render json: @user, status: :accepted
+        else
+            render json: {error: "Failed to update giveaway" }, status: :unprocessable_entity
+        end
     end
+
     
     def destroy
         if @user

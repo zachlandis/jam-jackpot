@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, deleteUser } from './UsersSlice';
+import { fetchUsers, deleteUser, updateUser } from './UsersSlice';
 import { ClipLoader } from 'react-spinners';
 
 function AdminUsers() {
@@ -17,7 +17,7 @@ function AdminUsers() {
 
   const handleDelete = (userId) => {
     dispatch(deleteUser(userId));
-  };  
+  };
 
   const handleUpdate = (userId) => {
     setEditableFields((prevState) => ({
@@ -38,15 +38,14 @@ function AdminUsers() {
 
   const handleSave = (userId) => {
     console.log('Edited Values from Save', editedValues);
-    // Dispatch an action to update the user with editedValues[userId]
-    // You need to implement this action in your Redux logic
-
+    dispatch(updateUser({ id: userId, ...editedValues[userId] }));
     setEditedValues((prevState) => ({
       ...prevState,
       [userId]: {},
     }));
     handleUpdate(userId);
   };
+
 
   if (loading) {
     return (
@@ -58,16 +57,18 @@ function AdminUsers() {
     );
   }
 
+
   return (
-    <div>
-      <h1>User List</h1>
-      <table className="table table-striped">
-        <thead>
+    <div className="table-container">
+    <table className="table table-striped">
+        <thead className="table-header">
           <tr>
-            <th>User Full Name</th>
-            <th>User Phone</th>
-            <th>User Email</th>
-            <th>User Location</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>State</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -79,11 +80,22 @@ function AdminUsers() {
                 {editableFields[user.id] ? (
                   <input
                     type="text"
-                    value={editedValues[user.id]?.full_name || `${user.first_name} ${user.last_name}`}
-                    onChange={(e) => handleInputChange(user.id, 'full_name', e.target.value)}
+                    value={editedValues[user.id]?.first_name || `${user.first_name}`}
+                    onChange={(e) => handleInputChange(user.id, 'first_name', e.target.value)}
                   />
                 ) : (
-                  `${user.first_name} ${user.last_name}`
+                  `${user.first_name}`
+                )}
+              </td>
+              <td>
+                {editableFields[user.id] ? (
+                  <input
+                    type="text"
+                    value={editedValues[user.id]?.last_name || `${user.last_name} ${user.last_name}`}
+                    onChange={(e) => handleInputChange(user.id, 'last_name', e.target.value)}
+                  />
+                ) : (
+                  `${user.last_name}`
                 )}
               </td>
               <td>
@@ -109,20 +121,25 @@ function AdminUsers() {
                 )}
               </td>
               <td>
-                {editableFields[user.id] ? (
+              {editableFields[user.id] ? (
                   <input
                     type="text"
-                    value={`${editedValues[user.id]?.user_city || user.user_city}, ${
-                      editedValues[user.id]?.user_state || user.user_state
-                    }`}
-                    onChange={(e) => {
-                      const [city, state] = e.target.value.split(', ');
-                      handleInputChange(user.id, 'user_city', city);
-                      handleInputChange(user.id, 'user_state', state);
-                    }}
+                    value={editedValues[user.id]?.user_city || user.user_city}
+                    onChange={(e) => handleInputChange(user.id, 'user_city', e.target.value)}
                   />
                 ) : (
-                  `${user.user_city}, ${user.user_state}`
+                  user.user_city
+                )}
+              </td>
+              <td>
+              {editableFields[user.id] ? (
+                  <input
+                    type="text"
+                    value={editedValues[user.id]?.user_state || user.user_state}
+                    onChange={(e) => handleInputChange(user.id, 'user_state', e.target.value)}
+                  />
+                ) : (
+                  user.user_state
                 )}
               </td>
               <td>

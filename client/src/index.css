@@ -184,3 +184,18 @@
   height: 100%;
   cursor: pointer;
 }
+
+
+/* ADMIN PANEL */
+.table-container {
+  max-height: 100vh; 
+  overflow-y: auto; 
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff; 
+  z-index: 1; 
+}
+

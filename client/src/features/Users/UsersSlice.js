@@ -28,6 +28,32 @@ export const deleteUser = createAsyncThunk(
     }
   );
 
+// UPDATE
+export const updateUser = createAsyncThunk(
+    'users/updateUser',
+    async ({ id, ...editedValues }, { dispatch }) => {
+      try {
+        const response = await fetch(`/users/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(editedValues),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to update item');
+        }
+  
+        const updatedUser = await response.json();
+        return updatedUser;
+      } catch (error) {
+        console.error('Failed to update item', error);
+        throw error;
+      }
+    }
+  );
+
 const initialState = {
     entities: [],
     status: "idle,"
@@ -61,6 +87,17 @@ const usersSlice = createSlice({
             state.entities = state.entities.filter((user) => user.id !== action.meta.arg);
             state.status = 'idle';
         },
+        [updateUser.pending](state) {
+            state.status = "loading"
+        },
+        [updateUser.fulfilled](state, action) {
+            const updatedIndex = state.entities.findIndex((user) => user.id === action.payload.id)
+            if (updatedIndex !== -1) {
+                state.entities[updatedIndex] = action.payload;
+            }
+            state.status = "idle"
+        },
+        
           
     },
 })
