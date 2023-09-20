@@ -2,16 +2,15 @@ import React, { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./AdminEntries";
-import AdminGiveaways from "./AdminGiveaways";
+import AdminGiveaways from "./Giveaway/AdminGiveaways";
 import AdminPrizes from "./AdminPrizes";
-import AdminUsers from "./AdminUsers";
-import CreateGiveaway from "./CreateGiveaway";
+import AdminUsers from "./Users/AdminUsers";
+import CreateGiveaway from "./Giveaway/CreateGiveaway";
 
 function AdminDash() {
     const [activeButton, setActiveButton] = useState('allGiveaways')
 
     function onButtonClick(buttonName) {
-        // console.log("this works")
         setActiveButton(buttonName)
     }
 

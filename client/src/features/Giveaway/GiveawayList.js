@@ -30,9 +30,6 @@ function GiveawayList() {
             <p><strong>Date:</strong> {giveaway.event_date}</p>
             <p><strong>Venue:</strong> {giveaway.event_venue}</p>
             <p><strong>Location:</strong> {giveaway.event_location}</p>
-          </div>
-          <div className="column">
-            <p><strong>Total Entries:</strong> {giveaway.total_entries}</p>
             <Link to={`/giveaways/${giveaway.id}`}>
               Enter Giveaway
             </Link>

@@ -49,6 +49,36 @@ export const deleteGiveaway = createAsyncThunk(
   }
 );
 
+export const updateGiveaway = createAsyncThunk(
+  'giveaways/updateGiveaway',
+  async ({ id, ...editedValues }, { dispatch }) => {
+    try {
+      const response = await fetch(`/giveaways/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editedValues),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update item');
+      }
+
+      const updatedGiveaway = await response.json();
+
+      // After a successful update, return the updated giveaway data
+      return updatedGiveaway;
+    } catch (error) {
+      console.error('Failed to update item', error);
+      throw error;
+    }
+  }
+);
+
+
+
+
 
 
 
@@ -67,11 +97,11 @@ const giveawaysSlice = createSlice({
     giveawayDeleted(state, action) {
       state.entities = state.entities.filter((giveaway) => giveaway.id !== action.payload)
     },
-    giveawayUpdated(state, action) {
-      const giveaway = state.entities.find(
-        (giveaway) => giveaway.id === action.payload.id
-      );
-    },
+    // giveawayUpdated(state, action) {
+    //   const giveaway = state.entities.find(
+    //     (giveaway) => giveaway.id === action.payload.id
+    //   );
+    // },
   },
   extraReducers: {
     [fetchGiveaways.pending](state) {
@@ -87,6 +117,13 @@ const giveawaysSlice = createSlice({
     [deleteGiveaway.fulfilled]: (state, action) => {
       state.entities = state.entities.filter((giveaway) => giveaway.id !== action.payload)
     },
+    [updateGiveaway.fulfilled]: (state, action) => {
+      console.log('updateGiveaway.fulfilled', action.payload);
+      const updatedIndex = state.entities.findIndex((giveaway) => giveaway.id === action.payload.id)
+      if (updatedIndex !== -1) {
+        state.entities[updatedIndex] = action.payload;
+      }
+    }
   },
 });
 

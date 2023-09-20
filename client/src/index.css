@@ -60,6 +60,8 @@
 .giveawayList-div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
 }
 
 .column {
@@ -74,11 +76,15 @@
 }
 
 .poster-column {
-  flex: 0 0 25%; /* Set a fixed width of 25% */
+  flex: 0 0 75%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .poster img {
   max-width: 100%; /* Ensure the image fits within the column */
+  max-height: 50%;
 }
 
 

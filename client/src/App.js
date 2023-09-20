@@ -4,8 +4,8 @@ import './index.css';
 
 
 
-import Giveaways from './features/Giveaways';
-import GiveawayPage from './features/GiveawayPage';
+import Giveaways from './features/Giveaway/Giveaways';
+import GiveawayPage from './features/Giveaway/GiveawayPage';
 import Home from './features/Home';
 import NavBar from './features/NavBar';
 import AdminDash from './features/AdminDash';
