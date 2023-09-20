@@ -20,7 +20,6 @@ function GiveawayList() {
   }
   const giveawayElements = giveaways.map((giveaway) => {
     const formattedDate = formatDate(giveaway.event_date);
-    console.log(giveaway)
 
     return (
       <div key={giveaway.id} className='left-aligned'>

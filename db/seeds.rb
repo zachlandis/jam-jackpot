@@ -57,6 +57,9 @@ giveaway4.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway4.titl
 giveaway5.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway5.title)
 
 # Create 20 Users
+cities = Array.new(20) { Faker::Address.city }
+states = Array.new(20) { Faker::Address.state_abbr }
+
 users = []
 20.times do
   first_name = Faker::Name.first_name
@@ -65,13 +68,17 @@ users = []
   phone = Faker::PhoneNumber.phone_number
   random_giveaway = Giveaway.order("RANDOM()").first 
   prev_wins = random_giveaway.title
+  user_city = cities.pop # Get a random city from the array
+  user_state = states.pop # Get a random state from the array
 
   users << User.create!(
     first_name: first_name,
     last_name: last_name,
     email: email,
     phone: phone,
-    prev_wins: prev_wins
+    prev_wins: prev_wins,
+    user_city: user_city,      # Assign the random city
+    user_state: user_state    # Assign the random state
   )
 end
 

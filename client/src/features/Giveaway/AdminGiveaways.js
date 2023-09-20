@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGiveaways, deleteGiveaway, updateGiveaway } from './giveawaysSlice';
 
@@ -7,6 +8,7 @@ function AdminGiveaways() {
     const [editedValues, setEditedValues] = useState({}); 
 
     const giveaways = useSelector((state) => state.giveaways.entities);
+    const loading = useSelector((state) => state.giveaways.status === 'loading');
 
     const dispatch = useDispatch();
 
@@ -61,69 +63,99 @@ function AdminGiveaways() {
       handleUpdate(giveawayId);
     };
        
+    if (loading) {
+        return (
+        <div className='loading-spinner-container'>
+            <div className='loading-spinner'>
+            <ClipLoader loading={loading} size={150} color={'#123abc'} />
+            </div>
+        </div>
+        );
+    }
+
 
     return (
         <div>
-            {giveaways.map((giveaway) => (
-                <div key={giveaway.id} className='left-aligned'>
-                    <div className='giveawayList-div'>
-                        <div className="column">
-                            <h2>{editableFields[giveaway.id] ? (
-                                <input
-                                    type="text"
-                                    value={editedValues[giveaway.id]?.title || giveaway.title}
-                                    onChange={(e) => handleInputChange(giveaway.id, 'title', e.target.value)}
-                                />
-                            ) : (
-                                giveaway.title
-                            )}</h2>
-                              <p><strong>Venue: </strong>{editableFields[giveaway.id] ? (
-                                <input
-                                    type="text"
-                                    value={editedValues[giveaway.id]?.event_venue || giveaway.event_venue}
-                                    onChange={(e) => handleInputChange(giveaway.id, 'event_venue', e.target.value)}
-                                />
-                            ) : (
-                                giveaway.event_venue
-                            )}</p>
-                            <p><strong>Location: </strong>{editableFields[giveaway.id] ? (
-                                <input
-                                    type="text"
-                                    value={editedValues[giveaway.id]?.event_location || giveaway.event_location}
-                                    onChange={(e) => handleInputChange(giveaway.id, 'event_location', e.target.value)}
-                                />
-                            ) : (
-                                giveaway.event_location
-                            )}</p>
-                            <p><strong>Date:</strong> {editableFields[giveaway.id] ? (
-                                <input
-                                    type="text"
-                                    value={editedValues[giveaway.id]?.event_date || giveaway.event_date}
-                                    onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
-                                />
-                            ) : (
-                                formatDate(giveaway.event_date)
-                            )}</p>
-                            {/* Add similar logic for other fields */}
-                        </div>
-                        <div className="column">
-                            <p><strong>Total Entries:</strong> {giveaway.total_entries}</p>
-                            <h5> !! Add scrolling list of users !!</h5>
-                        </div>
-                        <div className="column">
-                            <div className="controls column">
-                                {editableFields[giveaway.id] ? (
-                                    <button onClick={() => handleSave(giveaway.id)}>Save</button>
-                                ) : (
-                                    <button onClick={() => handleDelete(giveaway.id)}>Delete Giveaway</button>
-                                )}
-                                <button onClick={() => handleUpdate(giveaway.id)}>Update Giveaway</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
+  <table className="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Venue</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Total Entries</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {giveaways.map((giveaway) => (
+        <tr key={giveaway.id}>
+          <td>
+            {editableFields[giveaway.id] ? (
+              <input
+                type="text"
+                value={editedValues[giveaway.id]?.title || giveaway.title}
+                onChange={(e) => handleInputChange(giveaway.id, 'title', e.target.value)}
+              />
+            ) : (
+              giveaway.title
+            )}
+          </td>
+          <td>
+            {editableFields[giveaway.id] ? (
+              <input
+                type="text"
+                value={editedValues[giveaway.id]?.event_venue || giveaway.event_venue}
+                onChange={(e) => handleInputChange(giveaway.id, 'event_venue', e.target.value)}
+              />
+            ) : (
+              giveaway.event_venue
+            )}
+          </td>
+          <td>
+            {editableFields[giveaway.id] ? (
+              <input
+                type="text"
+                value={editedValues[giveaway.id]?.event_location || giveaway.event_location}
+                onChange={(e) => handleInputChange(giveaway.id, 'event_location', e.target.value)}
+              />
+            ) : (
+              giveaway.event_location
+            )}
+          </td>
+          <td>
+            {editableFields[giveaway.id] ? (
+              <input
+                type="text"
+                value={editedValues[giveaway.id]?.event_date || giveaway.event_date}
+                onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
+              />
+            ) : (
+              formatDate(giveaway.event_date)
+            )}
+          </td>
+          <td>{giveaway.total_entries}</td>
+          <td>
+            <div className="controls">
+              {editableFields[giveaway.id] ? (
+                <button onClick={() => handleSave(giveaway.id)}>✅</button>
+                ) : (
+                  <button onClick={() => handleUpdate(giveaway.id)}>✍️</button>
+                  )}
+            </div>
+        </td>
+            <td>
+            <div>
+                <button onClick={() => handleDelete(giveaway.id)}>❌</button>
+              </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     );
 }
 
