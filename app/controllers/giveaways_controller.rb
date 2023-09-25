@@ -15,7 +15,7 @@ class GiveawaysController < ApplicationController
 
         prize_name = "#{giveaway.title} - #{giveaway.event_venue} - #{giveaway.event_date}"
 
-        prize = Prize.new(prize_name: prize_name, number_of_tickets: number_of_tickets)
+        prize = Prize.new(prize_name: prize_name, number_of_tickets: number_of_tickets, redemption_instructions: redemption_instructions)
 
         giveaway.prize = prize
 

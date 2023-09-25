@@ -13,6 +13,7 @@ function CreateGiveaway() {
     event_poster: '',
     genre: '',
     number_of_tickets: '',
+    redemption_instructions: '',
   });
 
   function handleOnChange(e) {
@@ -34,6 +35,7 @@ function CreateGiveaway() {
       event_poster: formData.event_poster,
       genre: formData.genre,
       number_of_tickets: formData.number_of_tickets,
+      redemption_instructions: formData.redemption_instructions,
       total_entries: 0,
     };
     dispatch(createGiveaway(payload));
@@ -46,12 +48,12 @@ function CreateGiveaway() {
       event_poster: '',
       genre: '',
       number_of_tickets: '',
+      redemption_instructions: '',
     });
   }
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center">New Giveaway</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
         <h5>Giveaway Title</h5>
@@ -172,6 +174,19 @@ function CreateGiveaway() {
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
+        </div>
+        <br/>
+        <div className="form-group">
+        <h5>Prize Redemption Instructions</h5>
+          <input
+            className="form-control"
+            name="redemption_instructions"
+            type="text"
+            placeholder="Redemption Instructions"
+            value={formData.redemption_instructions}
+            onChange={handleOnChange}
+            required
+          />
         </div>
         <br/>
         <button type="submit" className="btn btn-primary">

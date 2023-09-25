@@ -25,6 +25,6 @@ class PrizesController < ApplicationController
     private
 
     def prize_params
-        params.permit(:prize_name, :number_of_tickets, :giveaway_id)
+        params.permit(:prize_name, :number_of_tickets, :giveaway_id, :redemption_instructions)
     end
 end

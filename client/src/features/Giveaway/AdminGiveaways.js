@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGiveaways, deleteGiveaway, updateGiveaway } from './giveawaysSlice';
+import { fetchPrizes, updatePrize } from '../Prizes/PrizesSlice';
+
 
 function AdminGiveaways() {
     const [editableFields, setEditableFields] = useState({}); 
     const [editedValues, setEditedValues] = useState({}); 
+    const [editablePrizes, setEditablePrizes] = useState({}); 
+    const [editedPrizes, setEditedPrizes] = useState({});
+
 
     const giveaways = useSelector((state) => state.giveaways.entities);
     const loading = useSelector((state) => state.giveaways.status === 'loading');
@@ -36,32 +41,61 @@ function AdminGiveaways() {
     };
 
     const handleUpdate = (giveawayId) => {
-        setEditableFields((prevState) => ({
-            ...prevState,
-            [giveawayId]: !prevState[giveawayId],
-        }));
+      setEditableFields((prevState) => ({
+          ...prevState,
+          [giveawayId]: !prevState[giveawayId],
+      }));
+      
+      if (!editedPrizes[giveawayId]) {
+          setEditedPrizes((prevState) => ({
+              ...prevState,
+              [giveawayId]: {
+                  number_of_tickets: giveaways.find((g) => g.id === giveawayId)?.prize.number_of_tickets || 0,
+                  redemption_instructions: giveaways.find((g) => g.id === giveawayId)?.prize.redemption_instructions || '',
+              },
+          }));
+      }
     };
+  
 
     const handleInputChange = (giveawayId, fieldName, value) => {
-        setEditedValues((prevState) => ({
-            ...prevState,
-            [giveawayId]: {
-                ...prevState[giveawayId],
-                [fieldName]: value,
-            },
-        }));
-    };
+      if (fieldName === 'number_of_tickets' || fieldName === 'redemption_instructions') {
+          setEditedPrizes((prevState) => ({
+              ...prevState,
+              [giveawayId]: {
+                  ...prevState[giveawayId],
+                  [fieldName]: value,
+              },
+          }));
+      } else {
+          setEditedValues((prevState) => ({
+              ...prevState,
+              [giveawayId]: {
+                  ...prevState[giveawayId],
+                  [fieldName]: value,
+              },
+          }));
+      }
+  };
+  
 
 
-    const handleSave = (giveawayId) => {
-      console.log("Edited Values from Save", editedValues);
-      dispatch(updateGiveaway({ id: giveawayId, ...editedValues[giveawayId] }));
-      setEditedValues((prevState) => ({
+  const handleSave = (giveawayId) => {
+    dispatch(updateGiveaway({ id: giveawayId, ...editedValues[giveawayId] }));
+    dispatch(updatePrize({id: giveawayId, ...editedPrizes[giveawayId]}));
+
+    setEditedValues((prevState) => ({
         ...prevState,
         [giveawayId]: {},
-      }));
-      handleUpdate(giveawayId);
-    };
+    }));
+    setEditedPrizes((prevState) => ({
+        ...prevState,
+        [giveawayId]: {},
+    }));
+
+    handleUpdate(giveawayId);
+  };
+
 
     function handlePickWinner(giveawayId) {
       console.log("Winner Picked")
@@ -97,6 +131,7 @@ function AdminGiveaways() {
                 <th>Date</th>
                 <th>Genre</th>
                 <th>Prize</th>
+                <th>Redeem</th>
                 <th>Total Entries</th>
                 <th>Pick Winner</th>
                 <th>Edit</th>
@@ -162,17 +197,28 @@ function AdminGiveaways() {
                     )}
                   </td>
                   <td>
-                    {/* {editableFields[giveaway.id] ? (
-                      <input
-                        type="text"
-                        value={editedValues[giveaway.id]?.event_date || giveaway.event_date}
-                        onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
-                      />
-                    ) : ( */}
-                      {giveaway.prize.number_of_tickets}
-                    {/* )} */}
-                  </td>
-                  <td>{giveaway.total_entries}</td>
+                    {editableFields[giveaway.id] ? (
+                        <input
+                            type="text"
+                            value={editedPrizes[giveaway.id]?.number_of_tickets || ''}
+                            onChange={(e) => handleInputChange(giveaway.id, 'number_of_tickets', e.target.value)}
+                        />
+                    ) : (
+                        giveaway.prize.number_of_tickets
+                    )}
+                </td>
+                <td>
+                    {editableFields[giveaway.id] ? (
+                        <input
+                            type="text"
+                            value={editedPrizes[giveaway.id]?.redemption_instructions || ''}
+                            onChange={(e) => handleInputChange(giveaway.id, 'redemption_instructions', e.target.value)}
+                        />
+                    ) : (
+                        giveaway.prize.redemption_instructions
+                    )}
+                </td>
+                <td>{giveaway.total_entries}</td>
                   <td>
                     <div>
                         <button onClick={() => handlePickWinner(giveaway.id)}>🙌</button>
