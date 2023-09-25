@@ -131,7 +131,7 @@ function AdminGiveaways() {
                 <th>Date</th>
                 <th>Genre</th>
                 <th>Prize</th>
-                <th>Redeem</th>
+                <th>Redeem Prize</th>
                 <th>Total Entries</th>
                 <th>Pick Winner</th>
                 <th>Edit</th>

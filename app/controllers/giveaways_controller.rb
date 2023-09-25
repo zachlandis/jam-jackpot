@@ -9,6 +9,7 @@ class GiveawaysController < ApplicationController
       
       def create
         number_of_tickets = params[:number_of_tickets].to_i
+        redemption_instructions = params[:redemption_instructions]
         
         giveaway = Giveaway.new(giveaway_params)
         giveaway.total_entries = 0
@@ -26,13 +27,6 @@ class GiveawaysController < ApplicationController
         end
       end
       
-      
-      
-      
-      
-       
-      
-
     def update
         @giveaway = Giveaway.find(params[:id])
         

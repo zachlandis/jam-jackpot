@@ -55,11 +55,11 @@ giveaway5 = Giveaway.create!(
 
 
 # Create Prizes for Giveaways
-giveaway1.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway1.title, redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
-giveaway2.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway2.title, redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
-giveaway3.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway3.title, redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
-giveaway4.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway4.title, redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
-giveaway5.create_prize(number_of_tickets: rand(2..4), prize_name: giveaway5.title, redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
+giveaway1.create_prize(number_of_tickets: rand(2..4), prize_name: "#{giveaway1.title} - #{giveaway1.event_venue} - #{giveaway1.event_date}", redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
+giveaway2.create_prize(number_of_tickets: rand(2..4), prize_name: "#{giveaway2.title} - #{giveaway2.event_venue} - #{giveaway2.event_date}", redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
+giveaway3.create_prize(number_of_tickets: rand(2..4), prize_name: "#{giveaway3.title} - #{giveaway3.event_venue} - #{giveaway3.event_date}", redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
+giveaway4.create_prize(number_of_tickets: rand(2..4), prize_name: "#{giveaway4.title} - #{giveaway4.event_venue} - #{giveaway4.event_date}", redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
+giveaway5.create_prize(number_of_tickets: rand(2..4), prize_name: "#{giveaway5.title} - #{giveaway5.event_venue} - #{giveaway5.event_date}", redemption_instructions: "Pick up your tickets at the box office. Bring ID.")
 
 # Create 20 Users
 cities = Array.new(20) { Faker::Address.city }
