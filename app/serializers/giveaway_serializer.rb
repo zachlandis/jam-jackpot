@@ -4,4 +4,5 @@ class GiveawaySerializer < ActiveModel::Serializer
   has_many :entries, serializer: EntrySerializer
   has_many :users
   has_one :prize, dependent: :destroy
+
 end

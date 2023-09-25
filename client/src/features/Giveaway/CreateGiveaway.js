@@ -6,12 +6,13 @@ function CreateGiveaway() {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    giveawayTitle: '',
-    giveawayEventDate: '',
-    giveawayEventVenue: '',
-    giveawayEventLocation: '',
-    giveawayEventPoster: '',
-    giveawayEventGenre: '',
+    title: '',
+    event_date: '',
+    event_venue: '',
+    event_location: '',
+    event_poster: '',
+    genre: '',
+    number_of_tickets: '',
   });
 
   function handleOnChange(e) {
@@ -26,23 +27,25 @@ function CreateGiveaway() {
     e.preventDefault();
 
     const payload = {
-      title: formData.giveawayTitle,
-      event_date: formData.giveawayEventDate,
-      event_venue: formData.giveawayEventVenue,
-      event_location: formData.giveawayEventLocation,
-      event_poster: formData.giveawayEventPoster,
-      giveawayEventGenre: formData.genre,
+      title: formData.title,
+      event_date: formData.event_date,
+      event_venue: formData.event_venue,
+      event_location: formData.event_location,
+      event_poster: formData.event_poster,
+      genre: formData.genre,
+      number_of_tickets: formData.number_of_tickets,
       total_entries: 0,
     };
     dispatch(createGiveaway(payload));
 
     setFormData({
-      giveawayTitle: '',
-      giveawayEventDate: '',
-      giveawayEventVenue: '',
-      giveawayEventLocation: '',
-      giveawayEventPoster: '',
-      giveawayEventGenre: '',
+      title: '',
+      event_date: '',
+      event_venue: '',
+      event_location: '',
+      event_poster: '',
+      genre: '',
+      number_of_tickets: '',
     });
   }
 
@@ -54,10 +57,10 @@ function CreateGiveaway() {
         <h5>Giveaway Title</h5>
           <input
             className="form-control"
-            name="giveawayTitle"
+            name="title"
             type="text"
             placeholder="Giveaway Title"
-            value={formData.giveawayTitle}
+            value={formData.title}
             onChange={handleOnChange}
             required
           />
@@ -67,10 +70,10 @@ function CreateGiveaway() {
         <h5>Event Date</h5>
           <input
             className="form-control"
-            name="giveawayEventDate"
+            name="event_date"
             type="date"
             placeholder="Event Date"
-            value={formData.giveawayEventDate}
+            value={formData.event_date}
             onChange={handleOnChange}
             required
           />
@@ -80,10 +83,10 @@ function CreateGiveaway() {
         <h5>Event Venue</h5>
           <input
             className="form-control"
-            name="giveawayEventVenue"
+            name="event_venue"
             type="text"
             placeholder="Event Venue"
-            value={formData.giveawayEventVenue}
+            value={formData.event_venue}
             onChange={handleOnChange}
             required
           />
@@ -93,10 +96,23 @@ function CreateGiveaway() {
         <h5>Event Location</h5>
           <input
             className="form-control"
-            name="giveawayEventLocation"
+            name="event_location"
             type="text"
             placeholder="Event City, State"
-            value={formData.giveawayEventLocation}
+            value={formData.event_location}
+            onChange={handleOnChange}
+            required
+          />
+        </div>
+        <br/>
+        <div className="form-group">
+        <h5>Event Poster Link</h5>
+          <input
+            className="form-control"
+            name="event_poster"
+            type="text"
+            placeholder="Event Poster Link"
+            value={formData.event_poster}
             onChange={handleOnChange}
             required
           />
@@ -106,10 +122,10 @@ function CreateGiveaway() {
           <h5>Event Genre</h5>
           <select
             className="form-control"
-            name="giveawayEventGenre"
+            name="genre"
             type="dropdown"
-            placeholder="EventGenre"
-            value={formData.giveawayEventLocation}
+            placeholder="Event Genre"
+            value={formData.genre}
             onChange={handleOnChange}
             required
           >
@@ -134,16 +150,28 @@ function CreateGiveaway() {
         </div>
         <br/>
         <div className="form-group">
-        <h5>Event Poster Link</h5>
-          <input
+          <h5>Prize Ticket Quantity</h5>
+          <select
             className="form-control"
-            name="giveawayEventPoster"
-            type="text"
-            placeholder="Event Poster Link"
-            value={formData.giveawayEventPoster}
+            name="number_of_tickets"
+            type="dropdown"
+            placeholder="Prize Ticket Quantity"
+            value={formData.number_of_tickets}
             onChange={handleOnChange}
             required
-          />
+          >
+            <option value="">0</option> 
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
         </div>
         <br/>
         <button type="submit" className="btn btn-primary">

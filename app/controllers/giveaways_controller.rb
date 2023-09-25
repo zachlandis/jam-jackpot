@@ -7,11 +7,31 @@ class GiveawaysController < ApplicationController
         render json: giveaways, include: [:entries, :prize]
       end
       
+      def create
+        number_of_tickets = params[:number_of_tickets].to_i
+        
+        giveaway = Giveaway.new(giveaway_params)
+        giveaway.total_entries = 0
 
-    def create 
-        giveaway = Giveaway.create(giveaway_params)
-        render json: giveaway
-    end
+        prize_name = "#{giveaway.title} - #{giveaway.event_venue} - #{giveaway.event_date}"
+
+        prize = Prize.new(prize_name: prize_name, number_of_tickets: number_of_tickets)
+
+        giveaway.prize = prize
+
+        if giveaway.save
+          render json: giveaway, status: :created
+        else
+          render json: { errors: giveaway.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+      
+      
+      
+      
+      
+       
+      
 
     def update
         @giveaway = Giveaway.find(params[:id])
@@ -33,7 +53,7 @@ class GiveawaysController < ApplicationController
     private
     
     def giveaway_params
-        params.permit(:title, :event_date, :event_venue, :event_location, :genre, :event_poster)
+        params.permit(:title, :event_date, :event_venue, :event_location, :genre, :event_poster, :total_entries)
     end
 
     def find_giveaway
