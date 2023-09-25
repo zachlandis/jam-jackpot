@@ -23,6 +23,9 @@ function GiveawayEntries() {
     return (
         <div>
             <div className="entries-counter"><strong>Entries:</strong> {entries}</div>   
+            <div>
+                {/* <strong>Prize: </strong>{giveaway} */}
+            </div>
             <div className="giveaway-entry-container">
                 <div className="giveaway-entry-column">
                     <h4>Follow Party Guru Productions on Facebook</h4>

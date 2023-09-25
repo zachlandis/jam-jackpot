@@ -11,6 +11,7 @@ function CreateGiveaway() {
     giveawayEventVenue: '',
     giveawayEventLocation: '',
     giveawayEventPoster: '',
+    giveawayEventGenre: '',
   });
 
   function handleOnChange(e) {
@@ -30,6 +31,7 @@ function CreateGiveaway() {
       event_venue: formData.giveawayEventVenue,
       event_location: formData.giveawayEventLocation,
       event_poster: formData.giveawayEventPoster,
+      giveawayEventGenre: formData.genre,
       total_entries: 0,
     };
     dispatch(createGiveaway(payload));
@@ -40,6 +42,7 @@ function CreateGiveaway() {
       giveawayEventVenue: '',
       giveawayEventLocation: '',
       giveawayEventPoster: '',
+      giveawayEventGenre: '',
     });
   }
 
@@ -48,6 +51,7 @@ function CreateGiveaway() {
       <h1 className="text-center">New Giveaway</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+        <h5>Giveaway Title</h5>
           <input
             className="form-control"
             name="giveawayTitle"
@@ -58,7 +62,9 @@ function CreateGiveaway() {
             required
           />
         </div>
+        <br/>
         <div className="form-group">
+        <h5>Event Date</h5>
           <input
             className="form-control"
             name="giveawayEventDate"
@@ -69,7 +75,9 @@ function CreateGiveaway() {
             required
           />
         </div>
+        <br/>
         <div className="form-group">
+        <h5>Event Venue</h5>
           <input
             className="form-control"
             name="giveawayEventVenue"
@@ -80,7 +88,9 @@ function CreateGiveaway() {
             required
           />
         </div>
+        <br/>
         <div className="form-group">
+        <h5>Event Location</h5>
           <input
             className="form-control"
             name="giveawayEventLocation"
@@ -91,7 +101,40 @@ function CreateGiveaway() {
             required
           />
         </div>
+        <br/>
         <div className="form-group">
+          <h5>Event Genre</h5>
+          <select
+            className="form-control"
+            name="giveawayEventGenre"
+            type="dropdown"
+            placeholder="EventGenre"
+            value={formData.giveawayEventLocation}
+            onChange={handleOnChange}
+            required
+          >
+            <option value="">Select Event Genre</option> 
+            <option value="Alternative">Alternative</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Country">Country</option>
+            <option value="EDM">EDM</option>
+            <option value="EDM - Bass">EDM - Bass</option>
+            <option value="EDM - House">EDM - House</option>
+            <option value="Folk">Folk</option>
+            <option value="Funk">Funk</option>
+            <option value="Hip Hop">Hip Hop</option>
+            <option value="Indie">Indie</option>
+            <option value="Jam">Jam</option>
+            <option value="Pop">Pop</option>
+            <option value="Reggae">Reggae</option>
+            <option value="R&B">R&B</option>
+            <option value="Rock">Rock</option>
+            <option value="Multi-Genre">Multi-Genre</option>
+          </select>
+        </div>
+        <br/>
+        <div className="form-group">
+        <h5>Event Poster Link</h5>
           <input
             className="form-control"
             name="giveawayEventPoster"
@@ -102,6 +145,7 @@ function CreateGiveaway() {
             required
           />
         </div>
+        <br/>
         <button type="submit" className="btn btn-primary">
           Create Giveaway
         </button>

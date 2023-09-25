@@ -8,6 +8,31 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", () => {
     .then((user) => user);
   });
 
+
+// CREATE
+export const signUpUser = createAsyncThunk(
+  'users/signUpUser',
+  async (userData, { dispatch }) => {
+    try {
+      const response = await fetch('/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to sign up');
+      }
+
+      const newUser = await response.json();
+      return newUser;
+    } catch (error) {
+      console.error('Failed to sign up', error);
+      throw error;
+    }
+  }
+);
+
 // DELETE
 export const deleteUser = createAsyncThunk(
     'users/deleteUser',

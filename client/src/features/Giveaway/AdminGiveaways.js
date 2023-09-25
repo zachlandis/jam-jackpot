@@ -62,6 +62,18 @@ function AdminGiveaways() {
       }));
       handleUpdate(giveawayId);
     };
+
+    function handlePickWinner(giveawayId) {
+      console.log("Winner Picked")
+      const giveawayEntries = giveaways.find((giveaway) => giveaway.id === giveawayId).entries;
+      const winningEntry = giveawayEntries[Math.floor(Math.random() * giveawayEntries.length)]
+
+      const updatedEntries = giveawayEntries.map((entry) => ({
+        ...entry,
+        winner: entry.id === winningEntry.id,
+      }));
+      dispatch(updateGiveaway({ id: giveawayId, entries: updatedEntries}));
+    }
        
     if (loading) {
         return (
@@ -83,7 +95,10 @@ function AdminGiveaways() {
                 <th>Venue</th>
                 <th>Location</th>
                 <th>Date</th>
+                <th>Genre</th>
+                <th>Prize</th>
                 <th>Total Entries</th>
+                <th>Pick Winner</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -132,10 +147,37 @@ function AdminGiveaways() {
                         onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
                       />
                     ) : (
-                      formatDate(giveaway.event_date)
+                      giveaway.event_date
                     )}
                   </td>
+                  <td>
+                    {editableFields[giveaway.id] ? (
+                      <input
+                        type="text"
+                        value={editedValues[giveaway.id]?.genre || giveaway.event_date}
+                        onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
+                      />
+                    ) : (
+                      giveaway.genre
+                    )}
+                  </td>
+                  <td>
+                    {/* {editableFields[giveaway.id] ? (
+                      <input
+                        type="text"
+                        value={editedValues[giveaway.id]?.event_date || giveaway.event_date}
+                        onChange={(e) => handleInputChange(giveaway.id, 'event_date', e.target.value)}
+                      />
+                    ) : ( */}
+                      {giveaway.prize.number_of_tickets}
+                    {/* )} */}
+                  </td>
                   <td>{giveaway.total_entries}</td>
+                  <td>
+                    <div>
+                        <button onClick={() => handlePickWinner(giveaway.id)}>🙌</button>
+                      </div>
+                  </td>
                   <td>
                     <div className="controls">
                       {editableFields[giveaway.id] ? (

@@ -3,9 +3,10 @@ class GiveawaysController < ApplicationController
 
 
     def index 
-        giveaways = Giveaway.all.order(event_date: :asc)
-        render json: giveaways, include: :entries
-    end
+        giveaways = Giveaway.includes(:entries, :prize).order(event_date: :asc)
+        render json: giveaways, include: [:entries, :prize]
+      end
+      
 
     def create 
         giveaway = Giveaway.create(giveaway_params)
@@ -32,7 +33,7 @@ class GiveawaysController < ApplicationController
     private
     
     def giveaway_params
-        params.permit(:title, :event_date, :event_venue, :event_location, :event_poster)
+        params.permit(:title, :event_date, :event_venue, :event_location, :genre, :event_poster)
     end
 
     def find_giveaway

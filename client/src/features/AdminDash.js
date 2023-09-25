@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
-import AdminEntries from "./AdminEntries";
+import AdminEntries from "./Entries/AdminEntries";
 import AdminGiveaways from "./Giveaway/AdminGiveaways";
 import AdminPrizes from "./AdminPrizes";
 import AdminUsers from "./Users/AdminUsers";
@@ -35,17 +35,17 @@ function AdminDash() {
                     All Users
                 </Button>
                 <Button
-                    variant={activeButton === 'allPrizes' ? 'primary' : 'secondary'}
-                    onClick={() => onButtonClick('allPrizes')}
-                >
-                    All Prizes
-                </Button>
-                <Button
                     variant={activeButton === 'allEntries' ? 'primary' : 'secondary'}
                     onClick={() => onButtonClick('allEntries')}
                 >
                     All Entries
                 </Button>
+                {/* <Button
+                    variant={activeButton === 'allPrizes' ? 'primary' : 'secondary'}
+                    onClick={() => onButtonClick('allPrizes')}
+                >
+                    All Prizes
+                </Button> */}
                 <Button
                     variant={activeButton === 'newGiveaway' ? 'primary' : 'secondary'}
                     onClick={() => onButtonClick('newGiveaway')}
@@ -55,7 +55,7 @@ function AdminDash() {
             </ButtonGroup>
             {activeButton === 'allGiveaways' && <AdminGiveaways />}
             {activeButton === 'allUsers' && <AdminUsers />}
-            {activeButton === 'allPrizes' && <AdminPrizes />}
+            {/* {activeButton === 'allPrizes' && <AdminPrizes />} */}
             {activeButton === 'allEntries' && <AdminEntries />}
             {activeButton === 'newGiveaway' && <CreateGiveaway />}
         </div>

@@ -69,6 +69,7 @@ function AdminUsers() {
             <th>Email</th>
             <th>City</th>
             <th>State</th>
+            <th>Admin?</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -141,7 +142,22 @@ function AdminUsers() {
                 ) : (
                   user.user_state
                 )}
-              </td>
+              </td>  
+              <td>
+              {editableFields[user.id] ? (
+                <input
+                  type="checkbox"
+                  checked={editedValues[user.id]?.admin || user.admin}
+                  onChange={(e) => handleInputChange(user.id, 'admin', e.target.checked)}
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  disabled
+                  checked={user.admin}
+                />
+              )}
+            </td>
               <td>
                 <div className="controls">
                 {editableFields[user.id] ? (

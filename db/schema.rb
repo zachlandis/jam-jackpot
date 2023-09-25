@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_191435) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_25_162751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191435) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "giveaway_id", null: false
+    t.date "entry_date"
+    t.boolean "winner"
     t.index ["giveaway_id"], name: "index_entries_on_giveaway_id"
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
@@ -34,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191435) do
     t.string "event_location"
     t.string "event_poster"
     t.integer "total_entries"
+    t.string "genre"
   end
 
   create_table "prizes", force: :cascade do |t|
@@ -54,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191435) do
     t.datetime "updated_at", null: false
     t.string "user_city"
     t.string "user_state"
+    t.string "password_digest"
+    t.boolean "admin"
   end
 
   add_foreign_key "entries", "giveaways"
