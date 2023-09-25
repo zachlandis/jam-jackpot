@@ -3,6 +3,7 @@ import { ClipLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGiveaways, deleteGiveaway, updateGiveaway } from './giveawaysSlice';
 import { fetchPrizes, updatePrize } from '../Prizes/PrizesSlice';
+import PickWinner from './PickWinner';
 
 
 function AdminGiveaways() {
@@ -10,6 +11,8 @@ function AdminGiveaways() {
     const [editedValues, setEditedValues] = useState({}); 
     const [editablePrizes, setEditablePrizes] = useState({}); 
     const [editedPrizes, setEditedPrizes] = useState({});
+    const [showPickWinnerByGiveaway, setShowPickWinnerByGiveaway] = useState({});
+    const [pickWinnerData, setPickWinnerData] = useState({});
 
 
     const giveaways = useSelector((state) => state.giveaways.entities);
@@ -20,6 +23,30 @@ function AdminGiveaways() {
     useEffect(() => {
         dispatch(fetchGiveaways()); 
     }, [dispatch]);
+
+    const handlePickWinner = (giveawayId) => {
+      const giveaway = giveaways.find((g) => g.id === giveawayId);
+  
+      setPickWinnerData((prevState) => ({
+        ...prevState,
+        [giveawayId]: {
+          title: giveaway.title,
+          event_date: giveaway.event_date,
+          event_venue: giveaway.event_venue,
+          event_location: giveaway.event_location,
+          entries: giveaway.entries,
+      },
+    }));
+  
+      togglePickWinner(giveawayId);
+    };
+    
+    const togglePickWinner = (giveawayId) => {
+      setShowPickWinnerByGiveaway((prevState) => ({
+        ...prevState,
+        [giveawayId]: !prevState[giveawayId],
+      }));
+    };
 
     function formatDate(dateString) {
       const options = {
@@ -96,18 +123,6 @@ function AdminGiveaways() {
     handleUpdate(giveawayId);
   };
 
-
-    function handlePickWinner(giveawayId) {
-      console.log("Winner Picked")
-      const giveawayEntries = giveaways.find((giveaway) => giveaway.id === giveawayId).entries;
-      const winningEntry = giveawayEntries[Math.floor(Math.random() * giveawayEntries.length)]
-
-      const updatedEntries = giveawayEntries.map((entry) => ({
-        ...entry,
-        winner: entry.id === winningEntry.id,
-      }));
-      dispatch(updateGiveaway({ id: giveawayId, entries: updatedEntries}));
-    }
        
     if (loading) {
         return (
@@ -121,6 +136,17 @@ function AdminGiveaways() {
 
 
     return (
+      <div>
+        {giveaways.map((giveaway) => (
+        showPickWinnerByGiveaway[giveaway.id] && (
+          <PickWinner 
+            key={giveaway.id} 
+            giveaway={pickWinnerData[giveaway.id]}
+            setShowPickWinnerByGiveaway={setShowPickWinnerByGiveaway}
+            showPickWinnerByGiveaway={showPickWinnerByGiveaway}
+          />
+        )
+      ))} 
       <div className="table-container">
       <table className="table table-striped">
         <thead className="table-header">
@@ -241,7 +267,8 @@ function AdminGiveaways() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>  
+        </div>
 </div>
 
     );
