@@ -5,26 +5,14 @@ import { ClipLoader } from 'react-spinners';
 
 function Home() {
     
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(fetchUsers());
-    // }, [dispatch]);
-    
-    // const loading = useSelector((state) => state.users.status === 'loading');
-
-    // if (loading) {
-    //     return (
-    //     <div className='loading-spinner-container'>
-    //         <div className='loading-spinner'>
-    //         <ClipLoader loading={loading} size={150} color={'#123abc'} />
-    //         </div>
-    //     </div>
-    //     );
-    // }
+    const loading = useSelector((state) => state.users.status === 'loading');
+    const currentUser = useSelector((state) => state.users.currentUser)
 
     return (
-        <h1>HOME!</h1>
+        <div>
+            <h1>HOME!</h1>
+            <h2>Welcome, {currentUser.first_name}</h2>
+        </div>
     )
 }
 

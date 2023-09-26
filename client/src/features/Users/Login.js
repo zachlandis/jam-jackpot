@@ -1,91 +1,66 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-// import { loginSuccess, loginFailure } from './actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from './UsersSlice';
+import { Navigate } from 'react-router-dom';
 
-function Login({ loginSuccess, loginFailure, currentUser, error, history }) {
-//   const [displaySignUpForm, setDisplaySignUpForm] = useState(false);
-//   const [formData, setFormData] = useState({
-//     email: '',
-//     password: '',
-//   });
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const errors = useSelector((state) => state.users.errors);
+  const dispatch = useDispatch();
+  
 
-//   const { email, password } = formData;
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    dispatch(loginUser({ email, password }));
+    
+    setEmail('');
+    setPassword('');
 
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     const userData = {
-//       email,
-//       password,
-//     };
-
-//     fetch('/login', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(userData),
-//     })
-//       .then((r) => {
-//         if (r.ok) {
-//           r.json().then((user) => {
-//             loginSuccess(user); // Dispatch success action
-//             history.push(`/cards`);
-//           });
-//         } else {
-//           r.json().then((data) => loginFailure(data.error)); // Dispatch failure action
-//         }
-//       });
-//   }
-
-//   function handleChange(e) {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   }
-
-//   function handleSignupClick() {
-//     setDisplaySignUpForm(!displaySignUpForm);
-//   }
+    <Navigate to="/" />;
+  };
 
   return (
-    <div id="login_div">
-      {/* <div style={{ textAlign: 'center' }}>
+    <div className="container mt-5">
+    <div className="row justify-content-center">
+      <div className="col-md-6">
+        <div className="card">
+          <div className="card-body">
+            <h2 className="card-title text-center">Login</h2>
+              <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <input
+                  className="form-control"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                </div>
+                <div className="mb-3">
+                <input
+                  className="form-control"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Login
+                  </button>
+                </div>
+              </form>
+            {errors && <div>{errors.message}</div>}
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 style={{ textAlign: 'center' }}>Please Log In</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <br />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <br />
-        <input type="submit" />
-      </form>
-      <br />
-      <br />
-      <button id="signup-button" onClick={handleSignupClick}>
-        Sign Up
-      </button>
-      <br />
-      {/* {displaySignUpForm ? <SignUpForm /> : null} */}
-      {/* {errors ? <div style={{ color: 'red' }}>{errors}</div> : null} */} */}
     </div>
   );
-}
+};
 
-// const mapStateToProps = (state) => ({
-//   currentUser: state.currentUser,
-//   error: state.error,
-// });
-
-// Connect the component to the Redux store and map actions to props
-export default Login
-// connect(mapStateToProps, { loginSuccess, loginFailure })(Login);
+export default Login;

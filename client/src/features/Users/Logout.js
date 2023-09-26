@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { logoutUser } from './UsersSlice'; // Import the logoutUser action
+import { Navigate } from 'react-router-dom';
+import { logoutUser } from './UsersSlice';
 
 function Logout() {
   const dispatch = useDispatch();
-//   const history = useHistory();
 
-  function handleLogout() {
-    dispatch(logoutUser());
+  useEffect(() => {
+    dispatch(logoutUser())
+  }, [dispatch]);
 
-    // history.push('/auth');
-  }
-
-  return (
-    <span onClick={handleLogout} style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-      Logout
-    </span>
-  );
+  return <Navigate to="/auth" /> 
 }
 
 export default Logout;

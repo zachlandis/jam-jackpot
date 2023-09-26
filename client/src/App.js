@@ -26,8 +26,8 @@ function App() {
           <Route path="/giveaways/:id" element={<GiveawayPage />} />
           <Route path="/giveaways" element={<Giveaways />} />
           <Route path="/admin" element={ <AdminDash />}/>
-          <Route path="/auth" elemeent={ <Login /> } />
-          <Route path="/logout" elemeent={ <Logout /> } />
+          <Route path="/auth" element={ <Login /> } />
+          <Route path="/logout" element={ <Logout /> } />
           <Route path='users/new' element={ <SignUp /> } />
           <Route path='/' element={ <Home /> } />
         </Routes>
