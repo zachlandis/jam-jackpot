@@ -6,24 +6,17 @@ class EntriesController < ApplicationController
   end
 
   def update
-    entry = Entry.find(params[:id])
-    entry.update(entry_params)
-    render json: entry
+    @entry = Entry.find(params[:id])
+    if @entry.update(entry_params)
+      render json: @entry
+    else
+      render json: { errors: @entry.errors }, status: :unprocessable_entity
+    end
   end
   
   private
 
   def entry_params
-    params.permit(:user, :entry_date, :giveaway, :winner)
+    params.require(:entry).permit(:entry_date, :giveaway_id, :winner, user_attributes: [:first_name, :last_name, :email])
   end
-      
 end
-
-# if params[:giveaway_id]
-#     entry = Entry.find(params[:giveaway_id])
-#     entries = giveaway.entries
-# else
-#     entries = Entry.all
-# end
-#     render json: entries
-# end

@@ -94,8 +94,7 @@ giveaways.each do |giveaway|
   10.times do
     random_user = users.sample
     entry_date = Faker::Date.between(from: 6.months.ago, to: Date.today)
-    winner = rand(10) == 0 
-    Entry.create!(user: random_user, giveaway: giveaway, entry_date: entry_date, winner: winner)
+    Entry.create!(user: random_user, giveaway: giveaway, entry_date: entry_date, winner: "")
   end
 end
 

@@ -9,50 +9,52 @@ export const fetchEntries = createAsyncThunk("entries/fetchEntries", () => {
   });
 
 // // DELETE
-// export const deleteUser = createAsyncThunk(
-//     'users/deleteUser',
-//     async (itemId, {dispatch}) => {
-//       try {
-//         const response = await fetch(`/users/${itemId}`, {
-//           method: 'DELETE',
-//         });
+export const deleteEntry = createAsyncThunk(
+    'entries/deleteEntry',
+    async (itemId, {dispatch}) => {
+      try {
+        const response = await fetch(`/entries/${itemId}`, {
+          method: 'DELETE',
+        });
   
-//         if (!response.ok) {
-//           throw new Error('Failed to delete item');
-//         }
-//         dispatch(fetchUsers());
-//       } catch (error) {
-//         console.error('Failed to delete item:', error);
-//         throw error;
-//       }
-//     }
-//   );
+        if (!response.ok) {
+          throw new Error('Failed to delete item');
+        }
+        dispatch(fetchEntries());
+      } catch (error) {
+        console.error('Failed to delete item:', error);
+        throw error;
+      }
+    }
+  );
 
 // // UPDATE
-// export const updateUser = createAsyncThunk(
-//     'users/updateUser',
-//     async ({ id, ...editedValues }, { dispatch }) => {
-//       try {
-//         const response = await fetch(`/users/${id}`, {
-//           method: 'PATCH',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify(editedValues),
-//         });
+export const updateEntry = createAsyncThunk(
+    'entries/updateEntries',
+    async ({ id, ...editedValues }, { dispatch }) => {
+      console.log('Edited Values:', editedValues);
+
+      try {
+        const response = await fetch(`/entries/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(editedValues),
+        });
   
-//         if (!response.ok) {
-//           throw new Error('Failed to update item');
-//         }
+        if (!response.ok) {
+          throw new Error('Failed to update item');
+        }
   
-//         const updatedUser = await response.json();
-//         return updatedUser;
-//       } catch (error) {
-//         console.error('Failed to update item', error);
-//         throw error;
-//       }
-//     }
-//   );
+        const updatedEntries = await response.json();
+        return updatedEntries;
+      } catch (error) {
+        console.error('Failed to update item', error);
+        throw error;
+      }
+    }
+  );
 
 const initialState = {
     entities: [],
@@ -66,7 +68,7 @@ const entriesSlice = createSlice({
         entryAdded(state, action) {
             state.entities.push(action.payload);
             },
-        userDeleted(state, action) {
+        entryDeleted(state, action) {
             state.entities = state.entities.filter((entry) => entry.id !== action.payload);
             },
               
@@ -79,27 +81,25 @@ const entriesSlice = createSlice({
             state.entities = action.payload;
             state.status = "idle";
         },
-        // [deleteUser.pending](state) {
-        //     state.status = "loading"
-        // },
-        // [deleteUser.fulfilled](state, action) {
-        //     // Update state by filtering out the deleted user
-        //     state.entities = state.entities.filter((user) => user.id !== action.meta.arg);
-        //     state.status = 'idle';
-        // },
-        // [updateUser.pending](state) {
-        //     state.status = "loading"
-        // },
-        // [updateUser.fulfilled](state, action) {
-        //     const updatedIndex = state.entities.findIndex((user) => user.id === action.payload.id)
-        //     if (updatedIndex !== -1) {
-        //         state.entities[updatedIndex] = action.payload;
-        //     }
-        //     state.status = "idle"
+        [deleteEntry.pending](state) {
+            state.status = "loading"
+        },
+        [deleteEntry.fulfilled](state, action) {
+            state.entities = state.entities.filter((entry) => entry.id !== action.meta.arg);
+            state.status = 'idle';
+        },
+        [updateEntry.pending](state) {
+            state.status = "loading"
+        },
+        [updateEntry.fulfilled](state, action) {
+            const updatedIndex = state.entities.findIndex((entry) => entry.id === action.payload.id)
+            if (updatedIndex !== -1) {
+                state.entities[updatedIndex] = action.payload;
+            }
+            state.status = "idle"
         },
         
-          
-
+    }
 })
 
 

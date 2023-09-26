@@ -141,6 +141,7 @@ function AdminGiveaways() {
         showPickWinnerByGiveaway[giveaway.id] && (
           <PickWinner 
             key={giveaway.id} 
+            giveawayId = {giveaway.id}
             giveaway={pickWinnerData[giveaway.id]}
             setShowPickWinnerByGiveaway={setShowPickWinnerByGiveaway}
             showPickWinnerByGiveaway={showPickWinnerByGiveaway}
