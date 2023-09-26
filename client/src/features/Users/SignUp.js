@@ -28,9 +28,18 @@ function SignUpForm() {
       last_name: lastName,
       user_city: city,
       user_state: state,
+      admin: false,
     };
 
     dispatch(signUpUser(userData));
+    
+    setEmail('');
+    setPhone('');
+    setPassword('');
+    setFirstName('');
+    setLastName('');
+    setCity('');
+    setState('');
   };
 
 
