@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 // READ
@@ -32,6 +33,24 @@ export const signUpUser = createAsyncThunk(
     }
   }
 );
+
+// LOGOUT
+export const logoutUser = () => (dispatch) => {
+  fetch('/logout', {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.ok) {
+        dispatch(logoutSuccess());
+      } else {
+        console.log('Logout failed');
+      }
+    })
+    .catch((error) => {
+      console.error('Error during logout:', error);
+    });
+};
+
 
 // DELETE
 export const deleteUser = createAsyncThunk(
@@ -79,6 +98,11 @@ export const updateUser = createAsyncThunk(
     }
   );
 
+  const logoutSuccess = () => ({
+    type: 'users/logoutSuccess', // Update with your slice name
+  });
+
+
 const initialState = {
     entities: [],
     status: "idle,"
@@ -122,6 +146,24 @@ const usersSlice = createSlice({
             }
             state.status = "idle"
         },
+        [signUpUser.pending](state) {
+          state.status = "loading"
+        },
+        [signUpUser.fulfilled](state, action) {
+          state.entities.push(action.payload);
+          state.isLoggedIn = true;
+          state.currentUserId = action.payload.id;
+          state.status = "idle";
+        },
+        [logoutUser.pending](state) {
+          state.status = "loading"
+        },
+        [logoutUser.fulfilled](state, action) {
+          const dispatch = useDispatch()
+          dispatch(logoutSuccess());
+          state.isLoggedIn = false;
+          state.status = "idle"
+        }
         
           
     },

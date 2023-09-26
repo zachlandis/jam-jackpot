@@ -1,44 +1,36 @@
 class UsersController < ApplicationController
+    # skip_before_action :authenticate_user, only: [:create]
 
-    before_action :find_user, only: [:destroy]
-
-    def index 
-        users = User.all.order(first_name: :asc)
-        render json: users
+    def index
+        users = User.all  
+        render json: users, status: :ok
     end
-
-    def create
-        user = User.create!(user_params)
-        render json: user 
+    
+    def show
+        render json: current_user, status: :ok
+    end
+    
+    def create 
+        user = User.create(user_params)
+            session[:user_id] = user.id
+            render json: user, status: :accepted
     end
 
     def update
-        @user = User.find(params[:id])
-        
-        if @user.update(user_params)
-            render json: @user, status: :accepted
-        else
-            render json: {error: "Failed to update giveaway" }, status: :unprocessable_entity
-        end
+        user = User.find(params[:id])
+        user.update(user_params)
+        render json: user, status: :accepted
     end
 
-    
     def destroy
-        if @user
-            @user.destroy
-            head :no_content
-        end
+        user = User.find(params[:id])
+        user.destroy
     end
-    
-    
+
+
     private
     
     def user_params
-        params.permit(:first_name, :last_name, :phone, :email, :user_city, :user_state, :prev_wins, :admin)
+        params.permit(:email, :phone, :first_name, :last_name, :user_city, :user_state, :password)
     end
-    
-    def find_user
-        @user = User.find(params[:id])
-    end
-
 end
