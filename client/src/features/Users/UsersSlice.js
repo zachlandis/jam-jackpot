@@ -1,4 +1,48 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import localStorage from "redux-persist/es/storage";
+
+// // LOAD CURRENTUSER FROM STORAGE
+// export const loadUserFromStorage = () => {
+//   return async (dispatch) => {
+//     try {
+//       const userJSON = await localStorage.getItem("currentUser");
+//       if (userJSON) {
+//         const user = JSON.parse(userJSON);
+//         console.log("User loaded from localStorage:", user);
+//         dispatch(loginUser(user));
+//       } else {
+//         dispatch(logoutSuccess());
+//         console.log("Logged out")
+//       }
+//     } catch (error) {
+//       console.error("Error loading user from localStorage:", error);
+//       dispatch(logoutSuccess());
+//     }
+//   };
+// };
+
+// userActions.js
+
+export const loadCurrentUser = createAsyncThunk(
+  "users/loadCurrentUser",
+  async () => {
+    const response = await fetch("/current_user_info"); 
+    if (!response.ok) {
+      throw new Error("Failed to load current user");
+    }
+    const user = await response.json();
+    return user;
+  }
+);
+
+export const updateCurrentUser = (userData) => ({
+  type: 'UPDATE_CURRENT_USER',
+  payload: userData,
+});
+
+
+
+
 
 // READ
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -34,20 +78,27 @@ export const loginUser = createAsyncThunk("users/loginUser", async (userData) =>
     throw new Error("Failed to login");
   }
   const user = await response.json();
+
   return user;
 });
 
 
-
 // LOGOUT
 export const logoutUser = createAsyncThunk("users/logoutUser", async () => {
-  const response = await fetch("/logout", {
-    method: "DELETE",
-  });
-  if (!response.ok) {
-    throw new Error("Failed to logout");
+  try {
+      const response = await fetch("/logout", {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to logout");
+    }
+
+    return;
+  } catch (error) {
+    console.error("Logout failed:", error);
+    throw error;
   }
-  return;
 });
 
 // DELETE
@@ -91,7 +142,8 @@ const initialState = {
   entities: [],
   status: "idle",
   errors: null,
-  currentUser: null,
+  currentUser: {},
+  isAuthenticated: false,
 };
 
 const usersSlice = createSlice({
@@ -106,9 +158,17 @@ const usersSlice = createSlice({
     },
     login(state, action) {
       state.isLoggedIn = true;
+      state.isAuthenticated = true;
       state.currentUserId = action.payload.id;
       state.currentUser = action.payload;
       
+    },
+    updateCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    },
+    logoutUser(state) {
+      state.currentUser = null;
+      console.log('currentUser logged out')
     },
   },
   extraReducers: {
@@ -149,6 +209,7 @@ const usersSlice = createSlice({
     },
     [loginUser.fulfilled](state, action) {
       state.isLoggedIn = true;
+      state.isAuthenticated = true;
       state.currentUserId = action.payload.id;
       state.currentUser = action.payload
       state.status = "idle";
@@ -161,11 +222,21 @@ const usersSlice = createSlice({
       state.status = "loading";
     },
     [logoutUser.fulfilled](state, action) {
-      state.isLoggedIn = false;
+      state.currentUserId = null;
+      state.currentUser = null;
+      state.isAuthenticated = true;
+      state.errors = null
       state.status = "idle";
+    },
+    [loadCurrentUser.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+      state.isAuthenticated = true;
+    },
+    [loadCurrentUser.rejected]: (state, action) => {
+      state.errors = action.error;
     },
   },
 });
 
-export const { userAdded, userDeleted, clearErrors } = usersSlice.actions;
+export const { userAdded, userDeleted } = usersSlice.actions;
 export default usersSlice.reducer;

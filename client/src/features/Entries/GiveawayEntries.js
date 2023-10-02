@@ -16,7 +16,6 @@ function GiveawayEntries() {
             } else if (action === "Follow PGP IG") {
                 setIgButtonDisabled(true)
             }
-            
         }
     }
 
@@ -24,7 +23,6 @@ function GiveawayEntries() {
         <div>
             <div className="entries-counter"><strong>Entries:</strong> {entries}</div>   
             <div>
-                {/* <strong>Prize: </strong>{giveaway} */}
             </div>
             <div className="giveaway-entry-container">
                 <div className="giveaway-entry-column">

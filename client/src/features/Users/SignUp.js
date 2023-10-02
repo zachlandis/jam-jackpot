@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from './UsersSlice'
 import { Navigate } from "react-router-dom";
-import { ClipLoader } from 'react-spinners';
 
 
 function SignUpForm() {
@@ -48,50 +47,47 @@ function SignUpForm() {
 
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="card-title text-center">Sign Up</h2>
-              {/* {errors ? <div className="alert alert-danger">{errors}</div> : null} */}
-              <form onSubmit={onSubmit}>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="City"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                </div>
-                <div>
-                <select
-                    className="form-control"
-                    name="state"
-                    type="dropdown"
-                    placeholder="State"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
+    <div className="signup-container">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title text-center">Sign Up</h2>
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <select
+                className="form-control"
+                name="state"
+                type="dropdown"
+                placeholder="State"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
                   >
                     <option value="">Select State</option> 
                     <option value="Alabama">Alabama</option>
@@ -144,46 +140,43 @@ function SignUpForm() {
                     <option value="West Virginia">West Virginia</option>
                     <option value="Wisconsin">Wisconsin</option>
                     <option value="Wyoming">West Virginia</option>
-                  </select>
-                </div>
-                <br/>
-                <div className="mb-3">
-                  <input
-                    type="phone"
-                    className="form-control"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
-                    Sign Up
-                  </button>
-                </div>
-              </form>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="phone"
+                      className="form-control"
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <button type="submit" className="btn btn-primary">
+                      Sign Up
+                    </button>
+                  </div>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
   );
 }

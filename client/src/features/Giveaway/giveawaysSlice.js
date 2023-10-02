@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-
 
 // READ
 
@@ -75,11 +73,6 @@ export const updateGiveaway = createAsyncThunk(
     }
   }
 );
-
-
-
-
-
 
 
 const initialState = {

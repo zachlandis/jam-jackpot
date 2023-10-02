@@ -10,10 +10,10 @@ import CreateGiveaway from "./Giveaway/CreateGiveaway";
 function AdminDash() {
     const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allGiveaways');
 
-    useEffect(() => {
-        // Save the active button name to localStorage when it changes
-        localStorage.setItem('activeButton', activeButton);
-    }, [activeButton]);
+    // useEffect(() => {
+    //     // Save the active button name to localStorage when it changes
+    //     localStorage.setItem('activeButton', activeButton);
+    // }, [activeButton]);
 
     function onButtonClick(buttonName) {
         setActiveButton(buttonName);
@@ -41,7 +41,7 @@ function AdminDash() {
                     All Entries
                 </Button>
                 {/* <Button
-                    variant={activeButton === 'allPrizes' ? 'primary' : 'secondary'}
+                    {activeButton === 'allPrizes' ? 'primary' : 'secondary'}
                     onClick={() => onButtonClick('allPrizes')}
                 >
                     All Prizes

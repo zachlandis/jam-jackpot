@@ -40,9 +40,7 @@ function PickWinner({ giveaway, showPickWinnerByGiveaway, setShowPickWinnerByGiv
         const handleMarkWinner = () => {
             if (selectedWinner) {                
               const updatedEntries = giveaway.entries.map((entry) => {
-                // console.log(entry)=
                 if (entry.id === selectedWinner.randomWinnerId) {
-                  // console.log(selectedWinner)
                   return {
                     ...entry,
                     winner: true,

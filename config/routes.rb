@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/auth', to: 'users#show'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/current_user_info', to: 'users#current_user_info'
+
 
 
   root "giveaways#index"

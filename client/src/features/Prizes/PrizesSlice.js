@@ -67,7 +67,6 @@ export const updatePrize = createAsyncThunk(
 
       const updatedPrize = await response.json();
 
-      // After a successful update, return the updated Prize data
       return updatedPrize;
     } catch (error) {
       console.error('Failed to update item', error);

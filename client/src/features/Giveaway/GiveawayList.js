@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { giveawayUpdated } from './giveawaysSlice';
 
 function GiveawayList() {
+  const dispatch = useDispatch();
   const giveaways = useSelector((state) => state.giveaways.entities);
 
   function formatDate(dateString) {
@@ -18,6 +18,7 @@ function GiveawayList() {
 
     return localDate.toLocaleDateString(undefined, options);
   }
+
   const giveawayElements = giveaways.map((giveaway) => {
     const formattedDate = formatDate(giveaway.event_date);
 
@@ -29,6 +30,7 @@ function GiveawayList() {
             <p><strong>Date:</strong> {giveaway.event_date}</p>
             <p><strong>Venue:</strong> {giveaway.event_venue}</p>
             <p><strong>Location:</strong> {giveaway.event_location}</p>
+            <p><strong>Prize:</strong> {giveaway.prize.number_of_tickets} tickets</p>
             <Link to={`/giveaways/${giveaway.id}`}>
               Enter Giveaway
             </Link>

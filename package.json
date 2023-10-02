@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "react-router-dom": "^6.16.0"
+    "axios": "^1.5.1",
+    "js-cookie": "^3.0.5",
+    "react-router-dom": "^6.16.0",
+    "redux-persist": "^6.0.0"
   }
 }

@@ -1,27 +1,59 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import "../index.css";
 
-function NavBar() {
-  const currentUser = useSelector((state) => state.users.currentUser);
+function NavBar({ currentUser }) {
+
 
   return (
     <nav className="navbar">
-      <div className="navbar-links">
-        <Link to="/">Home</Link>
-        <Link to="/giveaways">Giveaways</Link>
-        <Link to="/admin">Admin</Link>
-        {currentUser ? (
-          <>
-            <span>{currentUser.first_name} {currentUser.last_name}</span>
-            <Link to="/logout">Logout</Link>
-          </>
-        ) : (
-          <>
-            <Link to="/users/new">Sign Up</Link>
-            <Link to="/auth">Login</Link>
-          </>
-        )}
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          Jam Jackpot
+        </Link>
+
+        <div className="navbar-links">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/giveaways">
+                Giveaways
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/admin">
+                Admin
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="user-dropdown">
+          {currentUser ? (
+            <div className="user-menu">
+              <span className="user-name">
+                {currentUser.first_name} {currentUser.last_name}
+              </span>
+              <Link className="nav-link" to="/logout">
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <div className="auth-links">
+              <Link className="nav-link" to="/users/new">
+                Sign Up
+              </Link>
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
