@@ -42,7 +42,7 @@ function GiveawayPage() {
       return <div>Giveaway not found</div>;
     }
   
-    // Now you can safely access giveaway properties
+    
     const formattedDate = formatDate(giveaway.event_date);
   
     return (
