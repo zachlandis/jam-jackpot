@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    # skip_before_action :authenticate_user, only: [:current_user_info]
+    skip_before_action :authenticate_user, only: [:current_user_info]
   
     def index
       users = User.all

@@ -1,44 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import localStorage from "redux-persist/es/storage";
 
-// // LOAD CURRENTUSER FROM STORAGE
-// export const loadUserFromStorage = () => {
-//   return async (dispatch) => {
-//     try {
-//       const userJSON = await localStorage.getItem("currentUser");
-//       if (userJSON) {
-//         const user = JSON.parse(userJSON);
-//         console.log("User loaded from localStorage:", user);
-//         dispatch(loginUser(user));
-//       } else {
-//         dispatch(logoutSuccess());
-//         console.log("Logged out")
-//       }
-//     } catch (error) {
-//       console.error("Error loading user from localStorage:", error);
-//       dispatch(logoutSuccess());
-//     }
-//   };
-// };
 
-// userActions.js
-
-export const loadCurrentUser = createAsyncThunk(
-  "users/loadCurrentUser",
-  async () => {
-    const response = await fetch("/current_user_info"); 
-    if (!response.ok) {
-      throw new Error("Failed to load current user");
-    }
-    const user = await response.json();
-    return user;
-  }
-);
-
-export const updateCurrentUser = (userData) => ({
-  type: 'UPDATE_CURRENT_USER',
-  payload: userData,
-});
 
 
 
@@ -75,11 +37,30 @@ export const loginUser = createAsyncThunk("users/loginUser", async (userData) =>
     body: JSON.stringify(userData),
   });
   if (!response.ok) {
+    
     throw new Error("Failed to login");
   }
-  const user = await response.json();
-
+  const user = response.json();
+  
   return user;
+});
+
+
+export const loadCurrentUser = createAsyncThunk(
+  "users/loadCurrentUser",
+  async () => {
+    const response = await fetch("/current_user_info"); 
+    if (!response.ok) {
+      throw new Error("Failed to load current user");
+    }
+    const user = await response.json();
+    return user;
+  }
+);
+
+export const updateCurrentUser = (userData) => ({
+  type: 'UPDATE_CURRENT_USER',
+  payload: userData,
 });
 
 
@@ -161,7 +142,6 @@ const usersSlice = createSlice({
       state.isAuthenticated = true;
       state.currentUserId = action.payload.id;
       state.currentUser = action.payload;
-      
     },
     updateCurrentUser(state, action) {
       state.currentUser = action.payload;
@@ -207,6 +187,9 @@ const usersSlice = createSlice({
       state.currentUserId = action.payload.id;
       state.status = "idle";
     },
+    [loginUser.pending](state) {
+      state.status = "loading";
+    },
     [loginUser.fulfilled](state, action) {
       state.isLoggedIn = true;
       state.isAuthenticated = true;
@@ -217,7 +200,6 @@ const usersSlice = createSlice({
     [loginUser.rejected]: (state, action) => {
       state.errors = action.payload; 
     },
-
     [logoutUser.pending](state) {
       state.status = "loading";
     },

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchGiveaways, updateGiveaway } from './giveawaysSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateEntry } from '../Entries/EntriesSlice'
+import { updateUser } from '../Users/UsersSlice'
 
 
 
@@ -38,24 +39,28 @@ function PickWinner({ giveaway, showPickWinnerByGiveaway, setShowPickWinnerByGiv
         };
     
         const handleMarkWinner = () => {
-            if (selectedWinner) {                
-              const updatedEntries = giveaway.entries.map((entry) => {
-                if (entry.id === selectedWinner.randomWinnerId) {
-                  return {
-                    ...entry,
-                    winner: true,
-                  };
-                } else {
-                  return {
-                    ...entry,
-                    winner: false,
-                  };
-                }
-              });
-            setUpdatedEntries(updatedEntries)
-            dispatch(updateEntry({id: selectedWinner.randomWinnerId, ...selectedWinner, winner:true}))
-        }
-    };
+          if (selectedWinner) {
+            const updatedEntries = giveaway.entries.map((entry) => {
+              if (entry.id === selectedWinner.randomWinnerId) {
+                const updatedUser = { ...entry.user, prev_wins: [...entry.user.prev_wins, entry] };
+        
+                dispatch(updateUser({ id: entry.user.id, prev_wins: updatedUser.prev_wins }));
+        
+                return {
+                  ...entry,
+                  winner: true,
+                };
+              } else {
+                return {
+                  ...entry,
+                  winner: false,
+                };
+              }
+            });
+            setUpdatedEntries(updatedEntries);
+          }
+        };
+        
       
 
   return (

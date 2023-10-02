@@ -10,40 +10,21 @@ import SignUp from './features/Users/SignUp';
 import Login from './features/Users/Login';
 import Logout from './features/Users/Logout';
 import { loadCurrentUser } from './features/Users/UsersSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const [page, setPage] = useState("/")
-  const [currentUser, setCurrentUser] = useState({});
+  // const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
-
-
-
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(loadCurrentUser());
-  // }, [dispatch]);
+  const currentUser = useSelector((state) => state.users.currentUser)
+
 
   useEffect(() => {
-    fetch('/current_user_info')
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('User not authenticated');
-        }
-      })
-      .then((data) => {
-        setCurrentUser(data);
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error(error);
-        setCurrentUser(null)
-        setLoading(false)
-      });
-  }, []);
+    dispatch(loadCurrentUser())
+    setLoading(false)
+  }, [dispatch]);
 
   useEffect(() => {
     console.log("currentUser:", currentUser);
@@ -56,16 +37,16 @@ function App() {
     <div>
       <Router>
         <div>
-          <NavBar onChangePage={setPage} currentUser={currentUser}/>
+          <NavBar onChangePage={setPage}/>
         </div>
         <Routes>
           <Route path="/giveaways/:id" element={<GiveawayPage />} />
           <Route path="/giveaways" element={<Giveaways />} />
           <Route path="/admin" element={ <AdminDash />}/>
-          <Route path="/login" element={ <Login currentUser={currentUser} /> } />
-          <Route path="/logout" element={ <Logout setCurrentUser={setCurrentUser}/> } />
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/logout" element={ <Logout/> } />
           <Route path='users/new' element={ <SignUp /> } />
-          <Route path='/' element={ <Home currentUser={currentUser}/> } />
+          <Route path='/' element={ <Home/> } />
         </Routes>
       </Router>
     </div>

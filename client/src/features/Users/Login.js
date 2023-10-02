@@ -4,7 +4,7 @@ import { loginUser } from './UsersSlice';
 import { useNavigate } from 'react-router-dom';
 
 
-function Login({ currentUser }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
@@ -12,15 +12,14 @@ function Login({ currentUser }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const user = await dispatch(loginUser({ email, password }));
+    const user = dispatch(loginUser({ email, password }));
 
     console.log("From Login:", user)
     
     if (user) {
-      
       navigate('/');
     }
     

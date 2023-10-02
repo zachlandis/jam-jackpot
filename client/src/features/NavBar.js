@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../index.css";
 
-function NavBar({ currentUser }) {
+function NavBar() {
+
+  const currentUser = useSelector((state) => state.users.currentUser)
+
+  console.log(currentUser)
 
 
   return (
