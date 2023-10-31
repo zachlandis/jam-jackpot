@@ -2,9 +2,15 @@ class GiveawaysController < ApplicationController
     before_action :find_giveaway, only: [:destroy]
   
     def index
-      @giveaways = Giveaway.includes(:entries, :prize).order(event_date: :asc)
-      render json: @giveaways, include: [:entries, :prize]
+      giveaways = Giveaway.includes(:entries, :prize).order(event_date: :asc)
+  
+      if giveaways.any?
+        render json: giveaways, include: [:entries, :prize]
+      else
+        render json: { message: 'No giveaways available' }
+      end
     end
+    
   
     def create
       @giveaway = Giveaway.new(giveaway_params)

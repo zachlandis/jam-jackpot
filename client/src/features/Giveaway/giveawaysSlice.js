@@ -2,10 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // READ
 
-export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", () => {
-  return fetch("/giveaways")
-  .then((r) => r.json())
-  .then((giveaway) => giveaway);
+export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", async () => {
+  console.log("Initiate fetch")
+  const response = await fetch("/giveaways");
+  console.log(response)
+  const giveaways = await response.json();
+  console.log(giveaways)
+  return giveaways
+  
+  // return fetch("/giveaways")
+  // .then((r) => r.json())
+  // .then((giveaway) =>giveaway?.length ?giveaway:[]).catch(err => console.log(err));
 });
 
 // CREATE

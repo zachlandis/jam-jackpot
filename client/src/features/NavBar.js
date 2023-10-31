@@ -7,15 +7,14 @@ function NavBar() {
 
   const currentUser = useSelector((state) => state.users.currentUser)
 
-  console.log(currentUser)
-
-
   return (
     <nav className="navbar">
       <div className="container">
         <Link className="navbar-brand" to="/">
           Jam Jackpot
         </Link>
+
+    {currentUser ? (
 
         <div className="navbar-links">
           <ul className="nav-list">
@@ -36,7 +35,9 @@ function NavBar() {
             </li>
           </ul>
         </div>
-
+        ) : (
+          null
+      )}
         <div className="user-dropdown">
           {currentUser ? (
             <div className="user-menu">

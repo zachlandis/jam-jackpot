@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { fetchGiveaways, updateGiveaway } from './giveawaysSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateEntry } from '../Entries/EntriesSlice'
 import { updateUser } from '../Users/UsersSlice'

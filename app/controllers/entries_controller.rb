@@ -2,7 +2,7 @@ class EntriesController < ApplicationController
 
   def index
     entries = Entry.includes(giveaway: :prize).joins(giveaway: :prize).order('giveaways.event_date ASC')
-    render json: entries, include: { giveaway: :prize }
+    render json: entries
   end
 
   def update

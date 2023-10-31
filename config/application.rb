@@ -31,6 +31,9 @@ module JamJackpot
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     Rails.application.config.session_store :cookie_store, key: 'jam-jackpot'
+    
+  
+
 
 
     # Use SameSite=Strict for all cookies to help protect against CSRF

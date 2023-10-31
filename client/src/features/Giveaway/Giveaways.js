@@ -7,9 +7,9 @@ import GiveawayList from './GiveawayList';
 function Giveaways() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchGiveaways());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchGiveaways());
+  // }, [dispatch]);
   
   const loading = useSelector((state) => state.giveaways.status === 'loading');
 

@@ -1,10 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
-
-
-
-
+/////////////////////// ADMIN ///////////////////////
 
 // READ
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -26,24 +22,63 @@ export const signUpUser = createAsyncThunk("users/signUpUser", async (userData) 
   return user;
 });
 
+// UPDATE
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async ({ id, ...editedValues }) => {
+    const response = await fetch(`/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedValues),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to update user");
+    }
+    const user = await response.json();
+    return user;
+  }
+);
+// DELETE
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async (id) => {
+    const response = await fetch(`/users/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete user");
+    }
+    return;
+  }
+);
+
+/////////////////////// AUTH ///////////////////////
 
 // LOGIN
 export const loginUser = createAsyncThunk("users/loginUser", async (userData) => {
-  const response = await fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-  if (!response.ok) {
-    
-    throw new Error("Failed to login");
+  try {
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      const errorMessage = await response.text(); // Get the error message from the response
+      console.error('Login failed:', errorMessage);
+      throw new Error("Failed to login");
+    }
+    const user = response.json();
+    return user;
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
   }
-  const user = response.json();
-  
-  return user;
 });
+
 
 
 export const loadCurrentUser = createAsyncThunk(
@@ -82,49 +117,39 @@ export const logoutUser = createAsyncThunk("users/logoutUser", async () => {
   }
 });
 
-// DELETE
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (id) => {
-    const response = await fetch(`/users/${id}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete user");
-    }
-    return;
-  }
-);
 
-// UPDATE
-export const updateUser = createAsyncThunk(
-  "users/updateUser",
-  async ({ id, ...editedValues }) => {
-    const response = await fetch(`/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedValues),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to update user");
-    }
-    const user = await response.json();
-    return user;
-  }
-);
+/////////////////////// ENTRIES ///////////////////////
 
-export const logoutSuccess = () => ({
-  type: "users/logoutSuccess",
+export const addEntry = createAsyncThunk('users/addEntry', async (entry) => {
+  const response = await fetch(`/users/add_entry`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ entry }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add entry');
+  }
+
+  const user = await response.json();
+  return user;
 });
+
+
+
+
+// export const logoutSuccess = () => ({
+//   type: "users/logoutSuccess",
+// });
 
 const initialState = {
   entities: [],
   status: "idle",
   errors: null,
   currentUser: {},
-  isAuthenticated: false,
+  entries: []
 };
 
 const usersSlice = createSlice({
@@ -138,8 +163,6 @@ const usersSlice = createSlice({
       state.entities = state.entities.filter((user) => user.id !== action.payload);
     },
     login(state, action) {
-      state.isLoggedIn = true;
-      state.isAuthenticated = true;
       state.currentUserId = action.payload.id;
       state.currentUser = action.payload;
     },
@@ -150,8 +173,12 @@ const usersSlice = createSlice({
       state.currentUser = null;
       console.log('currentUser logged out')
     },
+    addEntry(state, action) {
+      state.entries.push(action.payload)
+    }
   },
   extraReducers: {
+    /////////////// ADMIN ///////////////
     [fetchUsers.pending](state) {
       state.status = "loading";
     },
@@ -178,12 +205,12 @@ const usersSlice = createSlice({
       }
       state.status = "idle";
     },
+    /////////////// AUTH ///////////////
     [signUpUser.pending](state) {
       state.status = "loading";
     },
     [signUpUser.fulfilled](state, action) {
       state.entities.push(action.payload);
-      state.isLoggedIn = true;
       state.currentUserId = action.payload.id;
       state.status = "idle";
     },
@@ -191,8 +218,6 @@ const usersSlice = createSlice({
       state.status = "loading";
     },
     [loginUser.fulfilled](state, action) {
-      state.isLoggedIn = true;
-      state.isAuthenticated = true;
       state.currentUserId = action.payload.id;
       state.currentUser = action.payload
       state.status = "idle";
@@ -204,19 +229,27 @@ const usersSlice = createSlice({
       state.status = "loading";
     },
     [logoutUser.fulfilled](state, action) {
-      state.currentUserId = null;
-      state.currentUser = null;
-      state.isAuthenticated = true;
+      state.currentUser = {};
       state.errors = null
       state.status = "idle";
     },
     [loadCurrentUser.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
-      state.isAuthenticated = true;
     },
     [loadCurrentUser.rejected]: (state, action) => {
       state.errors = action.error;
     },
+    /////////////// ENTRIES ///////////////
+    [addEntry.pending]: (state) => {
+      state.status = "loading"
+    },
+    [addEntry.fulfilled]: (state, action) => {
+      state.status = "idle"
+      state.entries = action.payload
+    }, 
+    [addEntry.rejected]: (state, action) => {
+      state.errors = action.error
+    }
   },
 });
 

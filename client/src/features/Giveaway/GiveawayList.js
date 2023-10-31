@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchGiveaways } from './giveawaysSlice';
 
 function GiveawayList() {
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchGiveaways())
+  })
+  
   const giveaways = useSelector((state) => state.giveaways.entities);
-
+  
   function formatDate(dateString) {
     const options = {
       weekday: 'long',
@@ -19,7 +25,9 @@ function GiveawayList() {
     return localDate.toLocaleDateString(undefined, options);
   }
 
-  const giveawayElements = giveaways.map((giveaway) => {
+
+
+  const giveawayElements = giveaways?.map((giveaway) => {
     const formattedDate = formatDate(giveaway.event_date);
 
     return (
