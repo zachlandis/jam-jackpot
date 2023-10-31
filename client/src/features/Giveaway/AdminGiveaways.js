@@ -22,7 +22,7 @@ function AdminGiveaways() {
 
     useEffect(() => {
         dispatch(fetchGiveaways()); 
-    }, [dispatch]);
+    }, []);
 
     const handlePickWinner = (giveawayId) => {
       const giveaway = giveaways.find((g) => g.id === giveawayId);

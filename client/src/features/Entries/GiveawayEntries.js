@@ -21,7 +21,7 @@ function GiveawayEntries() {
 
     return (
         <div>
-            <div className="entries-counter"><strong>Entries:</strong> {entries}</div>   
+            <div className="entries-counter"><strong>Your Entries:</strong> {entries}</div>   
             <div>
             </div>
             <div className="giveaway-entry-container">

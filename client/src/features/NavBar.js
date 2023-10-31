@@ -1,11 +1,20 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; 
+import { logoutUser } from "./Users/UsersSlice";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "../index.css";
 
 function NavBar() {
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const currentUser = useSelector((state) => state.users.currentUser)
+  const handleLogout = () => {
+    dispatch(logoutUser()).then(() => {
+      navigate('/login')
+    });
+  };
 
   return (
     <nav className="navbar">
@@ -13,8 +22,6 @@ function NavBar() {
         <Link className="navbar-brand" to="/">
           Jam Jackpot
         </Link>
-
-    {currentUser ? (
 
         <div className="navbar-links">
           <ul className="nav-list">
@@ -35,20 +42,18 @@ function NavBar() {
             </li>
           </ul>
         </div>
-        ) : (
-          null
-      )}
+
         <div className="user-dropdown">
-          {currentUser ? (
+          {/* {currentUser ? ( */}
             <div className="user-menu">
               <span className="user-name">
                 {currentUser.first_name} {currentUser.last_name}
               </span>
-              <Link className="nav-link" to="/logout">
+              <button className="nav-link" onClick={handleLogout}>
                 Logout
-              </Link>
+              </button>
             </div>
-          ) : (
+          {/* ) : ( */}
             <div className="auth-links">
               <Link className="nav-link" to="/users/new">
                 Sign Up
@@ -57,7 +62,7 @@ function NavBar() {
                 Login
               </Link>
             </div>
-          )}
+          {/* )} */}
         </div>
       </div>
     </nav>

@@ -18,7 +18,7 @@ return(
                     {currentUser.entries && currentUser.entries.length > 0 ? (
                     <ul>
                         {currentUser.entries.map((entry) => (
-                        <li key={entry.id}>{entry.giveaway.title}</li>
+                        <li key={entry.id}>{entry.giveaway?.title}</li>
                         ))}
                     </ul>
                     ) : (

@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
+
 
 /////////////////////// ADMIN ///////////////////////
 
@@ -100,7 +101,9 @@ export const updateCurrentUser = (userData) => ({
 
 
 // LOGOUT
-export const logoutUser = createAsyncThunk("users/logoutUser", async () => {
+export const logoutUser = createAsyncThunk(
+  "users/logoutUser", 
+  async () => {
   try {
       const response = await fetch("/logout", {
       method: "DELETE",
@@ -120,8 +123,16 @@ export const logoutUser = createAsyncThunk("users/logoutUser", async () => {
 
 /////////////////////// ENTRIES ///////////////////////
 
+export const selectCurrentUserId = createSelector(
+  (state) => state.users.currentUserId,
+  (currentUserId) => currentUserId
+);
+
+
 export const addEntry = createAsyncThunk('users/addEntry', async (entry) => {
-  const response = await fetch(`/users/add_entry`, {
+  const userId = selectCurrentUserId();
+
+  const response = await fetch(`/users/${userId}/add_entry`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -140,6 +151,9 @@ export const addEntry = createAsyncThunk('users/addEntry', async (entry) => {
 
 
 
+
+
+
 // export const logoutSuccess = () => ({
 //   type: "users/logoutSuccess",
 // });
@@ -149,7 +163,6 @@ const initialState = {
   status: "idle",
   errors: null,
   currentUser: {},
-  entries: []
 };
 
 const usersSlice = createSlice({
