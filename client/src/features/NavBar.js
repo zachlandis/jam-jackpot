@@ -12,7 +12,7 @@ function NavBar() {
 
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
-      navigate('/login')
+      navigate('/login');
     });
   };
 
@@ -25,26 +25,30 @@ function NavBar() {
 
         <div className="navbar-links">
           <ul className="nav-list">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/giveaways">
-                Giveaways
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/admin">
-                Admin
-              </Link>
-            </li>
+            {currentUser ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/giveaways">
+                    Giveaways
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/admin">
+                    Admin
+                  </Link>
+                </li>
+              </>
+            ) : null}
           </ul>
         </div>
 
         <div className="user-dropdown">
-          {/* {currentUser ? ( */}
+          {currentUser ? (
             <div className="user-menu">
               <span className="user-name">
                 {currentUser.first_name} {currentUser.last_name}
@@ -53,7 +57,7 @@ function NavBar() {
                 Logout
               </button>
             </div>
-          {/* ) : ( */}
+          ) : ( 
             <div className="auth-links">
               <Link className="nav-link" to="/users/new">
                 Sign Up
@@ -62,7 +66,7 @@ function NavBar() {
                 Login
               </Link>
             </div>
-          {/* )} */}
+          )}
         </div>
       </div>
     </nav>

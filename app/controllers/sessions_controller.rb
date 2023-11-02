@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-    # skip_before_action :authenticate_user, only: [:create, :destroy]
+    skip_before_action :authenticate_user, only: [:create, :destroy]
 
     def create  
         user = User.find_by(email: params[:email])
@@ -13,7 +13,17 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        session.delete(:user_id)
-        head :no_content
-    end
-end
+        if session[:user_id]
+          session.delete(:user_id)
+          head :no_content
+        else
+          render json: { error: "Not Logged In" }, status: :unprocessable_entity
+        end
+      end
+    end    
+    
+    
+    
+    
+    
+    
