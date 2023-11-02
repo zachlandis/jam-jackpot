@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    # skip_before_action :authenticate_user, only: [:current_user_info]
+    skip_before_action :authenticate_user, only: [:current_user_info]
   
     def index
       users = User.all
@@ -35,12 +35,18 @@ class UsersController < ApplicationController
     def destroy
       user = User.find(params[:id])
       user.destroy
-    end
+    end  
   
     private
-  
+
     def user_params
-      params.permit(:email, :phone, :first_name, :last_name, :user_city, :user_state, :password, :entries, :admin)
+      params.require(:user).permit(
+        :first_name, :last_name, :email, :phone, :user_city, :user_state, :password, :id, :admin,
+        prev_wins: [] 
+      )
     end
+        
+    
+    
   end
   

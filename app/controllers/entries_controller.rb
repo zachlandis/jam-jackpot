@@ -1,9 +1,12 @@
 class EntriesController < ApplicationController
 
   def index
-    entries = Entry.includes(giveaway: :prize).joins(giveaway: :prize).order('giveaways.event_date ASC')
-    render json: entries
+    entries = Entry.includes(:user, giveaway: :prize)
+                 .joins(giveaway: :prize)
+                 .order('giveaways.event_date ASC')
+    render json: entries, include: { user: { only: [:id, :first_name, :last_name, :email] } }
   end
+  
 
   def update
     @entry = Entry.find(params[:id])

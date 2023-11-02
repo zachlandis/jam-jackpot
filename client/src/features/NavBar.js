@@ -11,6 +11,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    console.log("Logging out..."); 
     dispatch(logoutUser()).then(() => {
       navigate('/login');
     });
@@ -23,9 +24,9 @@ function NavBar() {
           Jam Jackpot
         </Link>
 
+        {Object.keys(currentUser).length !== 0 ? ( 
         <div className="navbar-links">
           <ul className="nav-list">
-            {currentUser ? (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/">
@@ -43,12 +44,12 @@ function NavBar() {
                   </Link>
                 </li>
               </>
-            ) : null}
           </ul>
         </div>
+            ) : null}
 
         <div className="user-dropdown">
-          {currentUser ? (
+        {Object.keys(currentUser).length !== 0 ? ( 
             <div className="user-menu">
               <span className="user-name">
                 {currentUser.first_name} {currentUser.last_name}

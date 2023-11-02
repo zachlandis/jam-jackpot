@@ -7,7 +7,6 @@ export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", async
   const response = await fetch("/giveaways");
   console.log(response)
   const giveaways = await response.json();
-  console.log(giveaways)
   return giveaways
   
   // return fetch("/giveaways")

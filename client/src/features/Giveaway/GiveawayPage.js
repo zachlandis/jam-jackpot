@@ -51,10 +51,10 @@ function GiveawayPage() {
           <div className="giveaway-details">
             <h1 className="giveaway-title">{giveaway.title}</h1>
             <div className="giveaway-info">
-              <p><strong>Date:</strong> {formattedDate}</p>
-              <p><strong>Venue:</strong> {giveaway.event_venue}</p>
-              <p><strong>Location:</strong> {giveaway.event_location}</p>
-              <p><strong>Prize:</strong> {giveaway.prize.number_of_tickets} tickets</p>
+              <p className="black-text"><strong>Date:</strong> {formattedDate}</p>
+              <p className="black-text"><strong>Venue:</strong> {giveaway.event_venue}</p>
+              <p className="black-text"><strong>Location:</strong> {giveaway.event_location}</p>
+              <p className="black-text"><strong>Prize:</strong> {giveaway.prize.number_of_tickets} tickets</p>
             </div>
           </div>
           <img src={giveaway.event_poster} alt={giveaway.title} className="giveaway-poster" />

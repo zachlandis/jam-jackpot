@@ -26,7 +26,7 @@ function AdminGiveaways() {
 
     const handlePickWinner = (giveawayId) => {
       const giveaway = giveaways.find((g) => g.id === giveawayId);
-  
+    
       setPickWinnerData((prevState) => ({
         ...prevState,
         [giveawayId]: {
@@ -35,11 +35,12 @@ function AdminGiveaways() {
           event_venue: giveaway.event_venue,
           event_location: giveaway.event_location,
           entries: giveaway.entries,
-      },
-    }));
-  
+        },
+      }));
+    
       togglePickWinner(giveawayId);
     };
+    
     
     const togglePickWinner = (giveawayId) => {
       setShowPickWinnerByGiveaway((prevState) => ({
@@ -138,19 +139,19 @@ function AdminGiveaways() {
     return (
       <div>
         {giveaways.map((giveaway) => (
-        showPickWinnerByGiveaway[giveaway.id] && (
-          <PickWinner 
-            key={giveaway.id} 
-            giveawayId = {giveaway.id}
-            giveaway={pickWinnerData[giveaway.id]}
-            setShowPickWinnerByGiveaway={setShowPickWinnerByGiveaway}
-            showPickWinnerByGiveaway={showPickWinnerByGiveaway}
-          />
-        )
-      ))} 
-      <div className="table-container">
-      <table className="table table-striped">
-        <thead className="table-header">
+          showPickWinnerByGiveaway[giveaway.id] && (
+            <PickWinner
+              key={giveaway.id}
+              giveawayId={giveaway.id} 
+              giveaway={pickWinnerData[giveaway.id]}
+              setShowPickWinnerByGiveaway={setShowPickWinnerByGiveaway}
+              showPickWinnerByGiveaway={showPickWinnerByGiveaway}
+            />
+          )
+        ))}
+        <div className="table-container">
+          <table className="table table-striped">
+            <thead className="table-header">
               <tr>
                 <th>Title</th>
                 <th>Venue</th>
@@ -247,32 +248,31 @@ function AdminGiveaways() {
                 </td>
                 <td>{giveaway.total_entries}</td>
                   <td>
-                    <div>
-                        <button onClick={() => handlePickWinner(giveaway.id)}>🙌</button>
-                      </div>
+                     <div>
+                  <button onClick={() => handlePickWinner(giveaway. id)}>🙌</button>
+                </div>
                   </td>
                   <td>
-                    <div className="controls">
-                      {editableFields[giveaway.id] ? (
-                        <button onClick={() => handleSave(giveaway.id)}>✅</button>
-                        ) : (
-                          <button onClick={() => handleUpdate(giveaway.id)}>✍️</button>
-                          )}
-                    </div>
-                  </td>
-                    <td>
-                    <div>
-                        <button onClick={() => handleDelete(giveaway.id)}>❌</button>
-                      </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>  
-        </div>
-</div>
-
-    );
+                <div className="controls">
+                  {editableFields[giveaway.id] ? (
+                    <button onClick={() => handleSave(giveaway.id)}>✅</button>
+                  ) : (
+                    <button onClick={() => handleUpdate(giveaway.id)}>✍️</button>
+                  )}
+                </div>
+              </td>
+              <td>
+                <div>
+                  <button onClick={() => handleDelete(giveaway.id)}>❌</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
 }
 
 export default AdminGiveaways;

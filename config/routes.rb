@@ -12,7 +12,5 @@ Rails.application.routes.draw do
 
   get '/current_user_info', to: 'users#current_user_info'
 
-
-
   root "giveaways#index"
 end

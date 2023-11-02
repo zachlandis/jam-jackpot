@@ -1,15 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from "./UsersSlice";
 import { ClipLoader } from 'react-spinners';
 
-
 function Home() { 
-    const currentUser = useSelector((state) => state.users.currentUser)
+    const currentUser = useSelector((state) => state.users.currentUser);
+    const [userPrizes, setUserPrizes] = useState([]);
+    const dispatch = useDispatch();
 
-    console.log(currentUser)
+    useEffect(() => {
+        const fetchUserPrizes = async () => {
+            try {
+                const response = await fetch('/api/user_prizes'); 
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserPrizes(data.prizes);
+                } else {
+                    console.error('Error fetching user prizes');
+                }
+            } catch (error) {
+                console.error('Error fetching user prizes', error);
+            }
+        };
 
-    // Loading state while fetching data
+        fetchUserPrizes();
+    }, []); 
+
     if (!currentUser) {
         return (
             <div className="home-container loading">
@@ -27,21 +43,30 @@ function Home() {
                         <h2>Your Entries</h2>
                         {currentUser.entries && currentUser.entries.length > 0 ? (
                             <ul>
-                                {currentUser.entries.map((entry) => (
-                                    <li key={entry.id}>{entry.giveaway?.title}</li>
-                                ))}
+                            {Array.from(new Set(currentUser.entries.map((entry) => entry.giveaway?.title))).map((title) => (
+                                <li key={title}>
+                                    <a href={`/giveaways/${currentUser.entries.find((entry) => entry.giveaway?.title === title).giveaway?.id}`}>
+                                        {title}
+                                    </a>
+                                </li>
+                            ))}
                             </ul>
                         ) : (
                             <p>No entries found.</p>
                         )}
                     </div>
+
                     <div className="prizes-section">
                         <h2>Your Prizes</h2>
-                        {currentUser.prev_wins && currentUser.prev_wins.length > 0 ? (
+                        {userPrizes && userPrizes.length > 0 ? (
                             <ul>
-                                {currentUser.prev_wins.map((win, index) => (
-                                    <li key={index}>{win}</li>
-                                ))}
+                            {userPrizes.map((prize) => (
+                                <li key={prize.id}>
+                                    <a href={`/giveaways/${prize.giveaway.id}`}>
+                                        {prize.giveaway.title}
+                                    </a>
+                                </li>
+                            ))}
                             </ul>
                         ) : (
                             <p>No prizes found.</p>

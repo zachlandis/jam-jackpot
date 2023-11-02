@@ -102,23 +102,26 @@ export const updateCurrentUser = (userData) => ({
 
 // LOGOUT
 export const logoutUser = createAsyncThunk(
-  "users/logoutUser", 
+  "users/logoutUser",
   async () => {
-  try {
+    try {
       const response = await fetch("/logout", {
-      method: "DELETE",
-    });
+        method: "DELETE",
+      });
 
-    if (!response.ok) {
-      throw new Error("Failed to logout");
+      if (!response.ok) {
+        throw new Error("Failed to logout");
+      }
+
+      console.log("Logout successful"); 
+      return;
+    } catch (error) {
+      console.error("Logout failed:", error);
+      throw error;
     }
-
-    return;
-  } catch (error) {
-    console.error("Logout failed:", error);
-    throw error;
   }
-});
+);
+
 
 
 /////////////////////// ENTRIES ///////////////////////

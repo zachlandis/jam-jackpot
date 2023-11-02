@@ -3,6 +3,8 @@ class User < ApplicationRecord
     
     has_many :entries, dependent: :destroy
     has_many :giveaways, through: :entries
+    belongs_to :prize, optional: true
+
 
     validates :email, presence: true, uniqueness: true
     validates :first_name, presence: true

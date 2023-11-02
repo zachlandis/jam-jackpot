@@ -1,3 +1,10 @@
+body {
+  background: linear-gradient(to bottom, yellow, orange, teal);
+  height: 100vh; /* Ensure the gradient covers the entire viewport height */
+  margin: 0; /* Remove default margin to prevent white space */
+  padding: 0; /* Remove default padding */
+}
+
 .left-aligned {
   text-align: left;
 }
@@ -288,7 +295,6 @@ p {
 
 .giveaway-details {
   flex: 1;
-  background-color: #f98e31; 
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
@@ -304,6 +310,10 @@ p {
   font-size: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.giveaway-info p {
+  color: black;
 }
 
 .giveaway-poster {
@@ -385,4 +395,82 @@ p {
   background-color: #fff; 
   z-index: 1; 
 }
+
+/*PickWinner */
+.pick-winner-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  width: 48%;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 1rem;
+  color: #777;
+}
+
+.close-button {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: #495057;
+}
+
+.winner-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.winner-button:hover {
+  background-color: #218838;
+}
+
+.select-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.select-button:hover {
+  background-color: #0056b3;
+}
+
 
