@@ -8,14 +8,18 @@ function GiveawayEntries({ giveawayId }) {
     const [completedActions, setCompletedActions] = useState([]);
     const [fbButtonDisabled, setFbButtonDisabled] = useState(false);
     const [igButtonDisabled, setIgButtonDisabled] = useState(false);
-
-    const currentEntries = useSelector((state) => state.entries.entities);
+    
+    const allEntries = useSelector((state) => state.entries.entities);
+    const currentEntries = allEntries.filter((entry) => entry.giveaway.id === giveawayId);
+  
+    
     const dispatch = useDispatch();
   
     useEffect(() => {
       dispatch(fetchEntries());
     }, [dispatch]);
 
+  console.log("All Entries", allEntries)
   console.log("Current Entries", currentEntries)
 
 
@@ -80,7 +84,7 @@ function GiveawayEntries({ giveawayId }) {
         <br/>
         <br/>
         <div className="current-entries">
-            <h1>Current Entries</h1>
+            <h1>Current Entries ({currentEntries.length})</h1>
             <ul>
                 {currentEntries
                     .slice() 
