@@ -82,11 +82,14 @@ function GiveawayEntries({ giveawayId }) {
         <div className="current-entries">
             <h1>Current Entries</h1>
             <ul>
-            {currentEntries.map((entry) => (
-                <li key={entry.id}>
-                {`${entry.user.first_name} - ${(entry.entry_date)}`}
-                </li>
-            ))}
+                {currentEntries
+                    .slice() 
+                    .sort((a, b) => new Date(b.entry_date) - new Date(a.entry_date))
+                    .map((entry) => (
+                        <li key={entry.id}>
+                            {`${entry.user.first_name} - ${new Date(entry.entry_date).toLocaleString()}`}
+                        </li>
+                    ))}
             </ul>
         </div>
     </div>
