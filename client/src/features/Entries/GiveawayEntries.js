@@ -1,10 +1,22 @@
-import { React, useState} from "react";
+import { React, useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchEntries } from "./EntriesSlice";
 
-function GiveawayEntries() {
+
+function GiveawayEntries({ giveawayId }) {
     const [entries, setEntries] = useState(0);
     const [completedActions, setCompletedActions] = useState([]);
     const [fbButtonDisabled, setFbButtonDisabled] = useState(false);
     const [igButtonDisabled, setIgButtonDisabled] = useState(false);
+
+    const currentEntries = useSelector((state) => state.entries.entities);
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      dispatch(fetchEntries());
+    }, [dispatch]);
+
+  console.log("Current Entries", currentEntries)
 
 
     function handleActionComplete(action) {
@@ -18,6 +30,8 @@ function GiveawayEntries() {
             }
         }
     }
+
+    
 
     return (
         <div>
@@ -63,8 +77,21 @@ function GiveawayEntries() {
                 <button onClick={() => handleActionComplete('Follow PGP IG')}>Complete!</button>
             </div>
         </div>
+        <br/>
+        <br/>
+        <div className="current-entries">
+            <h1>Current Entries</h1>
+            <ul>
+            {currentEntries.map((entry) => (
+                <li key={entry.id}>
+                {`${entry.user.first_name} - ${(entry.entry_date)}`}
+                </li>
+            ))}
+            </ul>
         </div>
+    </div>
     );
 }
+    
 
 export default GiveawayEntries;

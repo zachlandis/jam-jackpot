@@ -60,8 +60,10 @@ function GiveawayPage() {
           <img src={giveaway.event_poster} alt={giveaway.title} className="giveaway-poster" />
         </div>
         <div className='giveaway-entries'>
-          <GiveawayEntries />
+          <GiveawayEntries giveawayId={giveawayId} />
         </div>
+        <br/>
+        <br/>
       </div>
     );
   }

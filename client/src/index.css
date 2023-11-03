@@ -1,8 +1,11 @@
 body {
   background: linear-gradient(to bottom, yellow, orange, teal);
-  height: 100vh; /* Ensure the gradient covers the entire viewport height */
-  margin: 0; /* Remove default margin to prevent white space */
-  padding: 0; /* Remove default padding */
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  
 }
 
 .left-aligned {
