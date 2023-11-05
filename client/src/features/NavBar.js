@@ -49,7 +49,7 @@ function NavBar() {
             ) : null}
 
         <div className="user-dropdown">
-        {Object.keys(currentUser).length !== 0 ? ( 
+          {Object.keys(currentUser).length !== 0 ? ( 
             <div className="user-menu">
               <span className="user-name">
                 {currentUser.first_name} {currentUser.last_name}

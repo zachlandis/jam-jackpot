@@ -1,6 +1,31 @@
 import React from "react";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import {loadCurrentUser} from '../Users/UsersSlice'
+// // CREATE
+export const createEntry = createAsyncThunk(
+  'entries/createEntry',
+  async (newEntry, {dispatch}) => {
+    try {
+      const response = await fetch(`/entries`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newEntry)
+      });
 
+      if (!response.ok) {
+        throw new Error('Failed to create item');
+      }
+      dispatch(fetchEntries());
+      dispatch(loadCurrentUser())
+    } catch (error) {
+      console.error('Failed to create item:', error);
+      throw error;
+    }
+  }
+);
+  
 // READ
 export const fetchEntries = createAsyncThunk("entries/fetchEntries", () => {
     return fetch("/entries")
@@ -48,6 +73,7 @@ export const updateEntry = createAsyncThunk(
         }
   
         const updatedEntries = await response.json();
+        dispatch(loadCurrentUser())
         return updatedEntries;
       } catch (error) {
         console.error('Failed to update item', error);
@@ -104,7 +130,14 @@ const entriesSlice = createSlice({
             }
             state.status = "idle"
         },
-        
+        [createEntry.pending](state) {
+          state.status = "loading"
+        },
+        [createEntry.fulfilled](state, action) {
+            state.entities.push(action.payload)
+            state.status = "idle"
+        },
+          
     }
 })
 

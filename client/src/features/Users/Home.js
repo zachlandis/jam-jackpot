@@ -8,23 +8,23 @@ function Home() {
     const [userPrizes, setUserPrizes] = useState([]);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchUserPrizes = async () => {
-            try {
-                const response = await fetch('/api/user_prizes'); 
-                if (response.ok) {
-                    const data = await response.json();
-                    setUserPrizes(data.prizes);
-                } else {
-                    console.error('Error fetching user prizes');
-                }
-            } catch (error) {
-                console.error('Error fetching user prizes', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUserPrizes = async () => {
+    //         try {
+    //             const response = await fetch('/api/user_prizes'); 
+    //             if (response.ok) {
+    //                 const data = await response.json();
+    //                 setUserPrizes(data.prizes);
+    //             } else {
+    //                 console.error('Error fetching user prizes');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching user prizes', error);
+    //         }
+    //     };
 
-        fetchUserPrizes();
-    }, []); 
+    //     fetchUserPrizes();
+    // }, []); 
 
     if (!currentUser) {
         return (
@@ -33,6 +33,7 @@ function Home() {
             </div>
         );
     }
+    console.log(currentUser.prev_wins)
 
     return (
         <div className="home-container">
@@ -58,12 +59,12 @@ function Home() {
 
                     <div className="prizes-section">
                         <h2>Your Prizes</h2>
-                        {userPrizes && userPrizes.length > 0 ? (
+                        {currentUser.prev_wins && currentUser.prev_wins.length > 0 ? (
                             <ul>
-                            {userPrizes.map((prize) => (
-                                <li key={prize.id}>
-                                    <a href={`/giveaways/${prize.giveaway.id}`}>
-                                        {prize.giveaway.title}
+                            {currentUser.prev_wins.map((win) => (
+                                <li key={win.prize?.id}>
+                                    <a href={`/giveaways/${win.prize.giveaway?.id}`}>
+                                        {win.prize?.prize_name}
                                     </a>
                                 </li>
                             ))}

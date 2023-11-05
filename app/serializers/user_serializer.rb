@@ -4,4 +4,8 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :entries
   has_many :giveaways
+
+  def prev_wins
+    object.prev_wins.map { |win| JSON.parse(win) } if object.prev_wins.present?
+  end
 end

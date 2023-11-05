@@ -9,7 +9,7 @@ function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByG
   const [updatedEntries, setUpdatedEntries] = useState([]);
 
   const dispatch = useDispatch();
-  const entries = useSelector((state) => state.entries.entities);
+  const entries = useSelector((state) => state.entries.entities)?.filter(entry=> entry.giveaway.id === giveawayId);
   const giveaways = useSelector((state) => state.giveaways.entities);
   const currentGiveawayId = giveawayId; 
   const currentGiveaway = giveaways.find((giveaway) => giveaway.id === currentGiveawayId);
@@ -35,6 +35,7 @@ function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByG
         last_name,
         email,
         randomWinnerId,
+        entry: randomWinner
       });
     } else {
       setSelectedWinner('Winner data not available');
@@ -43,27 +44,32 @@ function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByG
 
   const handleMarkWinner = () => {
     if (selectedWinner) {
-      const updatedEntries = entries.map((entry) => {
-        if (entry.id === selectedWinner.randomWinnerId) {
-          const updatedUser = {
-            ...entry.user,
-            prev_wins: [...entry.user.prev_wins, { giveaway: currentGiveaway, prize: entry.prize }],
-          };
+      console.log(selectedWinner)
+      dispatch(updateEntry({
+        id: selectedWinner.entry.id, 
+        winner: true,
+      }))
+    //   const updatedEntries = entries.map((entry) => {
+    //     if (entry.id === selectedWinner.randomWinnerId) {
+    //       const updatedUser = {
+    //         ...entry.user,
+    //         prev_wins: [...entry.user.prev_wins, { giveaway: currentGiveaway, prize: entry.prize }],
+    //       };
   
-          dispatch(updateUser({ id: entry.user.id, user: updatedUser }));
+    //       dispatch(updateUser({ id: entry.user.id, user: updatedUser }));
   
-          return {
-            ...entry,
-            winner: true,
-          };
-        } else {
-          return {
-            ...entry,
-            winner: false,
-          };
-        }
-      });
-      setUpdatedEntries(updatedEntries);
+    //       return {
+    //         ...entry,
+    //         winner: true,
+    //       };
+    //     } else {
+    //       return {
+    //         ...entry,
+    //         winner: false,
+    //       };
+    //     }
+    //   });
+    //   setUpdatedEntries(updatedEntries);
     }
   };
   
