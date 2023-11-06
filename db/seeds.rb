@@ -8,7 +8,7 @@ giveaway1 = Giveaway.create!(
   event_date: Date.new(2023, 10, 27),
   event_venue: "Red Rocks",
   event_location: "Denver, Colorado",
-  event_poster: "https://public.boxcloud.com/api/2.0/internal_files/1263553960758/versions/1380669724758/representations/jpg_paged_2048x2048/content/1.jpg?access_token=1!KbLs791Wzby2GKWSrq-X5L8QGdtYYKmlbh_mxQYygGM_h-ENbCfaYM-qW4GPwJ0vKdNRtoHIQPSqNjgqA3ak0wATiSEps9TBnSvtEJMhYhpBPW-5lM9vxdPWSjBI0Dcr7SEMhf8onkEUTAZAQRJ3e8MqYrYfLkVdnlCZzaDogLkuQ-yzeUfAq5NcyIblIixfm_kTVawuo8Ot04mBDaNkkGN9cfqCGOR03DRNbkLpGtqGgYFZROYzhksB9eJLwysRCceZN0o2tjZ8IhTNUnzMtPj4W8cUMBfzj_33_G0wAIrg-ROIKlBBNjBzdN4i657gugCjjMQ5FRDbqFtin-YottlOHDSDYeWNYKHgErCYeHlezbG9E6mzc1P8RLDO_cvNPxaCOMQhbqAW3N26C-B7XLItCjUnzciXAc8kJ3smU99yZhme9SG0coyTGVNHm8JJ8LTdyymB8D2yyFt5MMRS-aoKbrtoPNRTrZ-obCCF-HdXXfZusUSHxFv0rPY0YjD4j3_OSbYIqwtZ9srtpNIc_GhT5jokwhyLoWDNAjx5osIQ-R5XDIETqZHLs1KxaImIJDl5&shared_link=https%3A%2F%2Flne.app.box.com%2Fs%2Fos7ar8y6hcxiic82u0a7xf9sxiacsxu0&box_client_name=box-content-preview&box_client_version=2.102.0",
+  event_poster: "https://public.boxcloud.com/api/2.0/internal_files/1263541882416/versions/1380656703216/representations/jpg_paged_2048x2048/content/1.jpg?access_token=1!_rWHzIC71oK_wJqRZ3G0EO7ujcQPZPI21DARQt9gBerNJBBTgdX9olqvjfrk_AvHBI-i0gtQRaE1MF6Svj4eK2ByHd34XNBwGDgbxYpbRaHiOc52OvNqJnJ6RWA9TyNgqnaModjTWRdcOHNu0OYpJyd_VPKbG9381kNPsadPmnQbvCUc5liFRmcLZlr4dMcEbtpM5q3d1m9YDbGUY3xrgiCBBFo7OgC3aJbLEQmxrar_ydrM6wRJctcX99mpLUqG5npIS355maPT3vN-1ggr8GrdDLKyhG2nJOPhpwY7s4uxlpDyALk2KH5MB7TaiNcvBAxT6Dj-SZPDBnkZ6pNwPf9I5ZNGXAJMkUxGB5T07-NwrP11hbloG08EvBT93nFrus3AjYzLmIjDxH7A6hqR8MtsKN2i8SAiFadZaDpK91xFdxPAuhmw2tARCwU9gVvKGPFi8VPoxB5nmekyBMdc_820TJiEc7koJUgufGATr1uOXfzWGmaSZnfHioiZ5JCOSbRx_xy7H_oq6yz7pB2qPdFb-s6S3QYoHK3FpQcOtV24r3USq65EXu-OPO6Z9Qeu7a9H&shared_link=https%3A%2F%2Flne.app.box.com%2Fs%2Fos7ar8y6hcxiic82u0a7xf9sxiacsxu0&box_client_name=box-content-preview&box_client_version=2.102.0",
   total_entries: rand(1..100),
   genre: "Jam"
 )
@@ -18,7 +18,7 @@ giveaway2 = Giveaway.create!(
   event_date: Date.new(2023, 11, 3),
   event_venue: "Red Rocks",
   event_location: "Morrison, Colorado",
-  event_poster: "https://uc2fd91f0b28baaaa75579f47173.previews.dropboxusercontent.com/p/thumb/ACHJCBX16Sr6v6Gc-sr7InCuImCP7Sv8FrP60gG8iETC4uqvwo5cOXGGREodLvPg8cop749Thn_0iZan08yCnrkyTAvvB57yUfByBcN28ht8dELcBBP0lFbNY6Ise9mGkam3iViSXvPMjSkVG43ZwHMVuKfaGT3i0pTrvdA9MwUhTEEvbYc8zgTrC21B6kPOgcjZ3ldwu7jH1iE3BKidV4m9J9cP2zA2IxxoNke0dX2voXkuxSWcIZL2rRezfP_XaVZG0EnExVPjf1rkMhsSJ3KVurAKhSZtJxTybG8Bd6gbDpcBwIjx8BeIRHWlb2MJQFdh5QGFNjwDzRrujg-_d02F/p.jpeg",
+  event_poster: "https://ucad152b583b4b17ae3ee2e0f530.previews.dropboxusercontent.com/p/thumb/ACCtPgO_LAdn5VqLm8Ptz4DL1Rkg8Rq69wOg6ack5I-m_R2sWR6D7HeA7tVv0kJUUkmmPfV61OzeZAeRd3JCbtL7InIyM8yQ5jc0TTOi92jchGYgRpoMftPipv6G-VjAlWRH_66uM_oJTEYfI-vXudke_NyzpnXzsyb__YDIRwFMOmk380cbQOxxz1E1agcvBhanZR8tCLFA9VmDnlk03l_Ga5t5YyZvnMP_kOZoKjIeL8iWQtSEnoRC8f4LUKt_RZV7bZEdu3q6QW2b1dcvdbIyq4Nz4waWZf7ea8XbgsKptxZRZBi17P6awb6S7WpIPrcCCTaje31YYR7WEXJ31cgG/p.jpeg",
   total_entries: rand(1..100),
   genre: "House"
 )
@@ -28,7 +28,7 @@ giveaway3 = Giveaway.create!(
   event_date: Date.new(2023, 12, 22),
   event_venue: "Ogden Theatre",
   event_location: "Denver, Colorado",
-  event_poster: "https://uc930bb1a614c2c09ca98dba653f.previews.dropboxusercontent.com/p/thumb/ACFJYOou8yx3xvgygZ9X9-azm5hWyoYyV_rhnT4_jPYNjfALyF2Pst9y2ho6TVHQ9WBLrkcUbol21ZOsbR1EDUxMsbEXd0yz1XWGoFUFsReC8bKdJHkCKTAvWWeKV53uA9O6J_y4ldD5f_2l4S2saAa43InoDpCtxE8JykKDz1vBujk6oIl50y-SOPwfPFon9Yij2BaOFu8PQmNtGRmWj-7OMxVerQ8PlEC6BRtF-pma9LcyiQ1OG3YNuLvCmLNJm_008VHUKmJZDgFEGN5aNqx_hS35IEciHaXDmAWaE1-oekNOhpelC70dO3EeAwTZdyPYswy6SM6H7mNzw3SEo68m/p.jpeg",
+  event_poster: "https://uc930bb1a614c2c09ca98dba653f.previews.dropboxusercontent.com/p/thumb/ACA11VoAs9_6-F2qITLsFAYTza8vaQ76NxK-cO2pU_DpHrWYk-03GWW6sMHJy4e897Wsc9KeLwIm9ItY7ZqhTxbUk-ozbNR4HmphwK7AMTt64kmfjbxf9Tdq5G7g4WnDCQgsxj0IT-MpaD4MK-P2Fx5MMOYDM-UT3DoRB4vU2ugm7O-RVSRi4R_09AN1WjhvDXV-sk7r0x-cjrDJsOLWc_fUyXjIs0RKNRt4NrjBgyIyFD6sBHI9PiWoqJGWOjeMYhc9Dig4jv_j1SnInC9cQE5440XVmdb-2CocASZcBFM9H7s63DHGwBc0Jsd7UUuTCVpp3NU64ib9Y9jEQmkoHjvh/p.jpeg",
   total_entries: rand(1..100),
   genre: "Bass"
 )
@@ -38,7 +38,7 @@ giveaway4 = Giveaway.create!(
   event_date: Date.new(2024, 1, 5),
   event_venue: "Mission Ballroom",
   event_location: "Denver, Colorado",
-  event_poster: "https://uc88adffada72ebbd5c2cc966cd7.previews.dropboxusercontent.com/p/thumb/ACGl2KVcHOnjFIDJxu-_o_jHpKRz3heYG8-6UmMZwYaqkfqTPowggq-5wCpqDUHjoa1CK31GiZZvK-zjlUp4qqHsZAn9j8jsnfBwmqp4NjCyBjd_jYFF42ltX3-w53KhRnJslS7wxw1GQ-52awRpXzwmyHVvW3C0BiDihrXfN6ZCo4vD6M5opxZrwP8BDGml7cKRKSxt0lhCKRCrQrZLLlUgtykjJryB8-CSfwwG0XAz6YI9kNQyNIv9NQ_-Z4ycSd_o4C4BdYIbVGfX3O63Z07LRge6tFM0M0KqedoFyRK22HEatMISixEZw8Jl6f3tTuJ_n-x7cEvGWmgqNKdf0gb7/p.jpeg",
+  event_poster: "https://uc1783f43c0ee9cc36fc6d2ad916.previews.dropboxusercontent.com/p/thumb/ACDaHueNo13LHllMNDnfJtmaZNU1mXu8e2Miwd_K_7YRRnaoE971PqcrAwd4izzhA-F6GBbkW5ET6IRH9thyaBCQII-dNSxTVQ8NjaV96uYaZ2pO6_klssbBGW-ljT0PLWL6if5E3POuaPI0g7HSYdEO2xmhqyHeOS-_qXMctdtk5ADYTXyoWTlvLS9Cbn2EGTveualeFwCXpUMzQVxRRU1mwDEfdiaNeplFhCTzxcZGRzV1MrCcS5bAtDHDUYcPRM79HnK-yphHrNGn1et4wyl3cYxHjpf9rPvZVzplX-GRrPl_oY2L_I1-ZrazhT4GGQfiGaWWK9vBpAIdOJ6w0_Je/p.jpeg",
   total_entries: rand(1..100), 
   genre: "Bass"
 )
@@ -48,7 +48,7 @@ giveaway5 = Giveaway.create!(
   event_date: Date.new(2023, 9, 6),
   event_venue: "Ball Arena",
   event_location: "Denver, Colorado",
-  event_poster: "https://uc3f47e04e02090980312f283b73.previews.dropboxusercontent.com/p/thumb/ACGriWs50iG_AgXpNs8qq8DI77V3xOHp5SnK6keKQMxr9JN9vBZ3jGOWW2SSh2EcFac-OIsoSuiX7Bjd0PtLLcqyjKg6rCOyWu7rRNT4yTG9w7QIpIcFsPJENepIFODAtnj0s701S-CuIlTMshjPMxjOoI35agHHll11GXgpNwKcagnwcFM7g-r-TQaILclQo61PfZnL88plFeg_xW39XLwTHG7U_MxXABw4cOMHbnDBuPuYmTF3WPlR6R0onH61TgLZl2_IuHVhPvj5mFPwYfJ27yS9fYF9ZuIpMZbOFhJDz9-foaxlp6B85XGb8yZyNOqrspaqumu_c8118YJ8RthE/p.jpeg",
+  event_poster: "https://ucd147a45496af2e9120633e1ac9.previews.dropboxusercontent.com/p/thumb/ACBKbGHebFxIiG3LUWzLeWdR9BP4WDFZbcsE8ir0VpJkxjzez10WIpvs5StCgcdvmcxviXB6Aji_31TE_NDYLVtnEchT3N2vouLeMyQ30AoGA0OLli1tNxv6KiN4Swb2xSTHxKUI9VsLNCcC0B2YV2nxP5PrcehLg11vv0N6bdPY1nlOYEUgrx_eJzY68fOxubMkX35UUyCbywTrGrlXvklZjm3JaZLA6baJIp7lPghPzdj98AVPjHcfgNGQq5mSZW9Bcm7JNu2SgkiZfsxbSyHQ9aKNxn2ItUS1DUIreTlG-PXfC55DYMwc7sK8nlTyLraEt5IOXln0A0OZYI2Qh3Rh/p.jpeg",
   total_entries: rand(1..100),
   genre: "Hip Hop"
 )
@@ -66,7 +66,7 @@ cities = Array.new(20) { Faker::Address.city }
 states = Array.new(20) { Faker::Address.state_abbr }
 
 users = []
-20.times do
+20.times do | i |
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   email = Faker::Internet.email
@@ -85,7 +85,7 @@ users = []
     user_city: user_city,  
     user_state: user_state,
     password: 'password123',
-    admin: false
+    admin: (i % 7).zero?
   )
 end
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-
+import { fetchGiveaways } from "../Giveaway/giveawaysSlice"
 
 // READ
 
@@ -66,6 +66,7 @@ export const updatePrize = createAsyncThunk(
       }
 
       const updatedPrize = await response.json();
+      dispatch(fetchGiveaways())
 
       return updatedPrize;
     } catch (error) {

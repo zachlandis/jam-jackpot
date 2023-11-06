@@ -17,6 +17,8 @@ function NavBar() {
     });
   };
 
+  console.log()
+
   return (
     <nav className="navbar">
       <div className="container">
@@ -38,11 +40,11 @@ function NavBar() {
                     Giveaways
                   </Link>
                 </li>
-                <li className="nav-item">
+                {currentUser?.admin && <li className="nav-item">
                   <Link className="nav-link" to="/admin">
                     Admin
                   </Link>
-                </li>
+                </li>}
               </>
           </ul>
         </div>

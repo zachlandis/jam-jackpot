@@ -8,24 +8,6 @@ function Home() {
     const [userPrizes, setUserPrizes] = useState([]);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const fetchUserPrizes = async () => {
-    //         try {
-    //             const response = await fetch('/api/user_prizes'); 
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setUserPrizes(data.prizes);
-    //             } else {
-    //                 console.error('Error fetching user prizes');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching user prizes', error);
-    //         }
-    //     };
-
-    //     fetchUserPrizes();
-    // }, []); 
-
     if (!currentUser) {
         return (
             <div className="home-container loading">
