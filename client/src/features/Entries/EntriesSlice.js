@@ -97,12 +97,12 @@ const entriesSlice = createSlice({
         entryDeleted(state, action) {
             state.entities = state.entities.filter((entry) => entry.id !== action.payload);
             },
-        entryAdded(state, action) {
-          state.entities.push(action.payload)
-        },
-        entryDeleted(state, action) {
-          state.entities = state.entities.find((entry) => entry.id !== action.payload)
-        },
+        // entryAdded(state, action) {
+        //   state.entities.push(action.payload)
+        // },
+        // entryDeleted(state, action) {
+        //   state.entities = state.entities.find((entry) => entry.id !== action.payload)
+        // },
               
     },
     extraReducers: {

@@ -37,17 +37,11 @@ function GiveawayEntries({ giveawayId, giveawayTitle }) {
 
     function handleActionComplete(action) {
         if (!completedActions.includes(action)) {
-        // setEntries(entries +1);
-        // setCompletedActions([...completedActions, action]);
             try {
                 if (action === "Follow PGP FB") {
-                console.log("FB");
-                // setFbButtonDisabled(true);
                 addEntry(0)
                 } else if (action === "Follow PGP IG") {
                 addEntry(1)
-                console.log("IG");
-                // setIgButtonDisabled(true)
                 }
             } catch (error) {}
         }

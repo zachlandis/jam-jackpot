@@ -23,6 +23,10 @@ body {
   height: 100px; 
 }
 
+.error-message {
+  color: black;
+}
+
 /* Home*/
 
 .home-container {

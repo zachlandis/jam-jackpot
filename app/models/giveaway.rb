@@ -6,5 +6,4 @@ class Giveaway < ApplicationRecord
 
     validates :title, :event_date, :event_venue, :event_location, :event_poster, presence: true 
     
-
 end

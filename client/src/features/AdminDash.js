@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./Entries/AdminEntries";
@@ -9,6 +10,8 @@ import CreateGiveaway from "./Giveaway/CreateGiveaway";
 
 function AdminDash() {
     const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allGiveaways');
+    const error = useSelector((state) => state.giveaways.error);
+
 
     // useEffect(() => {
     //     // Save the active button name to localStorage when it changes

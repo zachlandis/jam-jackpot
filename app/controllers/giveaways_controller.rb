@@ -47,11 +47,15 @@ class GiveawaysController < ApplicationController
     private
   
     def giveaway_params
-      params.permit(:title, :event_date, :event_venue, :event_location, :genre, :event_poster, :total_entries)
+      params.permit(:title, :event_date, :event_venue, :event_location, :genre, :event_poster, :total_entries, :id)
     end
   
     def find_giveaway
-      @giveaway = Giveaway.find(params[:id])
+      @giveaway = Giveaway.find_by(id: params[:id])
+      if @giveaway.nil?
+        render json: { error: "Giveaway not found" }, status: :not_found
+      end
     end
+    
   end
   
