@@ -49,27 +49,6 @@ function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByG
         id: selectedWinner.entry.id, 
         winner: true,
       }))
-    //   const updatedEntries = entries.map((entry) => {
-    //     if (entry.id === selectedWinner.randomWinnerId) {
-    //       const updatedUser = {
-    //         ...entry.user,
-    //         prev_wins: [...entry.user.prev_wins, { giveaway: currentGiveaway, prize: entry.prize }],
-    //       };
-  
-    //       dispatch(updateUser({ id: entry.user.id, user: updatedUser }));
-  
-    //       return {
-    //         ...entry,
-    //         winner: true,
-    //       };
-    //     } else {
-    //       return {
-    //         ...entry,
-    //         winner: false,
-    //       };
-    //     }
-    //   });
-    //   setUpdatedEntries(updatedEntries);
     }
   };
   

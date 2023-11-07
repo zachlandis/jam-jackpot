@@ -97,11 +97,6 @@ const prizesSlice = createSlice({
     prizeDeleted(state, action) {
       state.entities = state.entities.filter((prize) => prize.id !== action.payload)
     },
-    // prizeUpdated(state, action) {
-    //   const giveaway = state.entities.find(
-    //     (giveaway) => giveaway.id === action.payload.id
-    //   );
-    // },
   },
   extraReducers: {
     [fetchPrizes.pending](state) {
