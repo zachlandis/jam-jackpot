@@ -4,7 +4,7 @@ import { createGiveaway } from './giveawaysSlice';
 
 function CreateGiveaway() {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.giveaways.error); // Select the error from Redux state
+  const error = useSelector((state) => state.giveaways.error); 
 
 
   const [formData, setFormData] = useState({

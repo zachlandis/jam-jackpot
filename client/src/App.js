@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const [page, setPage] = useState("/")
-  // const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 

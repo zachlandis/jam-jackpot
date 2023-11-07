@@ -152,15 +152,6 @@ export const addEntry = createAsyncThunk('users/addEntry', async (entry) => {
 });
 
 
-
-
-
-
-
-// export const logoutSuccess = () => ({
-//   type: "users/logoutSuccess",
-// });
-
 const initialState = {
   entities: [],
   status: "idle",
