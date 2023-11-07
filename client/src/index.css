@@ -279,13 +279,13 @@ p {
 .poster-column {
   flex: 0 0 75%; 
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
 }
 
 .poster img {
-  max-width: 100%; 
-  max-height: 50%;
+  max-width: 35vw; 
+  max-height: 60%;
 }
 
 

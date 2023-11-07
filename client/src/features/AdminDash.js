@@ -12,10 +12,6 @@ function AdminDash() {
     const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allGiveaways');
     const currentUser = useSelector((state) => state.users.currentUser);
 
-    // useEffect(() => {
-    //     // Save the active button name to localStorage when it changes
-    //     localStorage.setItem('activeButton', activeButton);
-    // }, [activeButton]);
 
     function onButtonClick(buttonName) {
         setActiveButton(buttonName);

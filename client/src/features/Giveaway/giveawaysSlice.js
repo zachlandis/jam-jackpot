@@ -8,10 +8,6 @@ export const fetchGiveaways = createAsyncThunk("giveaways/fetchGiveaways", async
   console.log(response)
   const giveaways = await response.json();
   return giveaways
-  
-  // return fetch("/giveaways")
-  // .then((r) => r.json())
-  // .then((giveaway) =>giveaway?.length ?giveaway:[]).catch(err => console.log(err));
 });
 
 // CREATE
@@ -71,7 +67,6 @@ export const updateGiveaway = createAsyncThunk(
 
       const updatedGiveaway = await response.json();
 
-      // After a successful update, return the updated giveaway data
       return updatedGiveaway;
     } catch (error) {
       console.error('Failed to update item', error);
@@ -96,11 +91,6 @@ const giveawaysSlice = createSlice({
     giveawayDeleted(state, action) {
       state.entities = state.entities.filter((giveaway) => giveaway.id !== action.payload)
     },
-    // giveawayUpdated(state, action) {
-    //   const giveaway = state.entities.find(
-    //     (giveaway) => giveaway.id === action.payload.id
-    //   );
-    // },
   },
   extraReducers: {
     [fetchGiveaways.pending](state) {

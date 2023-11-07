@@ -18,6 +18,7 @@ function Home() {
     console.log(currentUser.prev_wins)
 
     return (
+    
         <div className="home-container">
             {currentUser ? (
                 <div>

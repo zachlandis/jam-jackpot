@@ -86,7 +86,7 @@ function GiveawayEntries({ giveawayId, giveawayTitle }) {
         <br />
         <div className="giveaway-entry-container">
             <div className="giveaway-entry-column">
-            <h4>Follow Party Guru Productions on Facebook</h4>
+            <h4>Follow Party Guru Productions on Instagram</h4>
             </div>
             <div className="giveaway-entry-column">
             <a

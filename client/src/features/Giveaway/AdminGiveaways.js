@@ -248,7 +248,7 @@ function AdminGiveaways() {
                         giveaway.prize.redemption_instructions
                     )}
                 </td>
-                <td>{giveaway.total_entries}</td>
+                <td>{giveaway.entries.length}</td>
                   <td>
                      <div>
                   <button onClick={() => handlePickWinner(giveaway.id)}>🙌</button>

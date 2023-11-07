@@ -4,12 +4,6 @@ import { Link } from 'react-router-dom';
 import { fetchGiveaways } from './giveawaysSlice';
 
 function GiveawayList() {
-  // const dispatch = useDispatch();
-  
-  // useEffect(() => {
-  //   dispatch(fetchGiveaways())
-  // }, [])
-  
   const giveaways = useSelector((state) => state.giveaways.entities);
   
   function formatDate(dateString) {

@@ -22,3 +22,4 @@ We at Jam-Jackpot love live music and free concert tickets. So our mission is to
 - More Admin pannel functionality.
 - More ways for users to add entries to the giveaways.
 - More Home page buttons and levers for Users.
+- Allowing users to update their own user profile (not Admin privileges)
