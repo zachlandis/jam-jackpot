@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEntries } from "./EntriesSlice";
+import { fetchEntries } from "../Reducers/EntriesSlice";
 import { ClipLoader } from 'react-spinners';
 
 function AdminEntries() {

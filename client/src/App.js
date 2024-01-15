@@ -6,10 +6,10 @@ import GiveawayPage from './features/Giveaway/GiveawayPage';
 import Home from './features/Users/Home';
 import NavBar from './features/NavBar';
 import AdminDash from './features/AdminDash';
-import SignUp from './features/Users/SignUp';
-import Login from './features/Users/Login';
-import Logout from './features/Users/Logout';
-import { loadCurrentUser } from './features/Users/UsersSlice';
+import SignUp from './features/Auth/SignUp';
+import Login from './features/Auth/Login';
+import Logout from './features/Auth/Logout';
+import { loadCurrentUser } from './features/Reducers/UsersSlice';
 import { useDispatch } from 'react-redux';
 
 function App() {

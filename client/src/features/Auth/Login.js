@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCurrentUser, loginUser } from './UsersSlice';
+import { loadCurrentUser, loginUser } from '../Reducers/UsersSlice';
 import { useNavigate } from 'react-router-dom';
 
 

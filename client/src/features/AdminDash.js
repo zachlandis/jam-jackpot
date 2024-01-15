@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./Entries/AdminEntries";
 import AdminGiveaways from "./Giveaway/AdminGiveaways";
 import AdminPrizes from "./AdminPrizes";
-import AdminUsers from "./Users/AdminUsers";
+import AdminUsers from "./Admin/AdminUsers";
 import CreateGiveaway from "./Giveaway/CreateGiveaway";
 import { useSelector } from "react-redux";
 

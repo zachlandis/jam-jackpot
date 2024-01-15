@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import GiveawayEntries from '../Entries/GiveawayEntries';
 import { ClipLoader } from 'react-spinners';
-import { fetchGiveaways } from './giveawaysSlice';
+import { fetchGiveaways } from '../Reducers/giveawaysSlice';
 
 
 function GiveawayPage() {

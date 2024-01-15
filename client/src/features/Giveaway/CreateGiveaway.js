@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createGiveaway } from './giveawaysSlice';
+import { createGiveaway } from '../Reducers/giveawaysSlice';
 
 function CreateGiveaway() {
   const dispatch = useDispatch();

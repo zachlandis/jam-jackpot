@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchEntries, createEntry } from "./EntriesSlice";
+import { fetchEntries, createEntry } from "../Reducers/EntriesSlice";
 
 function GiveawayEntries({ giveawayId, giveawayTitle }) {
     const [entries, setEntries] = useState(0);

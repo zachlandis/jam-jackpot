@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGiveaways } from './giveawaysSlice';
+import { fetchGiveaways } from '../Reducers/giveawaysSlice';
 import { ClipLoader } from 'react-spinners';
 import GiveawayList from './GiveawayList';
 

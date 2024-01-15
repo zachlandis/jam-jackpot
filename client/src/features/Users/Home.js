@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from "./UsersSlice";
+import React from "react";
+import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 
 function Home() { 
     const currentUser = useSelector((state) => state.users.currentUser);
-    const [userPrizes, setUserPrizes] = useState([]);
-    const dispatch = useDispatch();
+    
 
     if (!currentUser) {
         return (
@@ -15,7 +13,6 @@ function Home() {
             </div>
         );
     }
-    console.log(currentUser.prev_wins)
 
     return (
     

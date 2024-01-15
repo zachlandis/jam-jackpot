@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateEntry } from '../Entries/EntriesSlice';
-import { updateUser } from '../Users/UsersSlice';
-import { fetchEntries } from '../Entries/EntriesSlice';
+import { updateEntry } from '../Reducers/EntriesSlice';
+import { updateUser } from '../Reducers/UsersSlice';
+import { fetchEntries } from '../Reducers/EntriesSlice';
 
 function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByGiveaway }) {
   const [selectedWinner, setSelectedWinner] = useState('');

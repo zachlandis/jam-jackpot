@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { fetchGiveaways } from "../Giveaway/giveawaysSlice"
+import { fetchGiveaways } from "./giveawaysSlice"
 
 // READ
 

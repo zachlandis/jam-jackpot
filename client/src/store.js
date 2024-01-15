@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import giveawaysReducer from "./features/Giveaway/giveawaysSlice";
-import usersReducer from "./features/Users/UsersSlice.js";
-import entriesReducer from "./features/Entries/EntriesSlice"
-import prizesReducer from "./features/Prizes/PrizesSlice"
+import giveawaysReducer from "./features/Reducers/giveawaysSlice.js";
+import usersReducer from "./features/Reducers/UsersSlice.js";
+import entriesReducer from "./features/Reducers/EntriesSlice.js"
+import prizesReducer from "./features/Reducers/PrizesSlice.js"
 
 
 const store = configureStore({

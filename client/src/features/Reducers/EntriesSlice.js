@@ -1,6 +1,6 @@
 import React from "react";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import {loadCurrentUser} from '../Users/UsersSlice'
+import {loadCurrentUser} from './UsersSlice'
 // // CREATE
 export const createEntry = createAsyncThunk(
   'entries/createEntry',

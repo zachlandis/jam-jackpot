@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchGiveaways } from './giveawaysSlice';
+import { fetchGiveaways } from '../Reducers/giveawaysSlice';
 
 function GiveawayList() {
   const giveaways = useSelector((state) => state.giveaways.entities);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, deleteUser, updateUser } from './UsersSlice';
+import { fetchUsers, deleteUser, updateUser } from '../Reducers/UsersSlice';
 import { ClipLoader } from 'react-spinners';
 
 function AdminUsers() {

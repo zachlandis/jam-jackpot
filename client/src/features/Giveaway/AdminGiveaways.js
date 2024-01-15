@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchGiveaways, deleteGiveaway, updateGiveaway } from './giveawaysSlice';
-import { fetchPrizes, updatePrize } from '../Prizes/PrizesSlice';
+import { fetchGiveaways, deleteGiveaway, updateGiveaway } from '../Reducers/giveawaysSlice';
+import { fetchPrizes, updatePrize } from '../Reducers/PrizesSlice';
 import PickWinner from './PickWinner';
 
 
