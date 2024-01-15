@@ -35,7 +35,6 @@ function AdminEntries() {
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Entry Date</th>
-                <th>Prize</th>
                 <th>Win?</th>
               </tr>
             </thead>
@@ -48,13 +47,6 @@ function AdminEntries() {
                   <td>{entry.user.phone}</td>
                   <td>{entry.user.email}</td>
                   <td>{entry.entry_date}</td>
-                  <td>
-                      {entry.giveaway && entry.giveaway.prize ? (
-                          entry.giveaway.prize.number_of_tickets
-                      ) : (
-                          "N/A"
-                      )}
-                  </td>
                   <td>{entry.winner ? "Y" : "N"}</td>
                 </tr>
               ))}

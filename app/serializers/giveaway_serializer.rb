@@ -5,4 +5,7 @@ class GiveawaySerializer < ActiveModel::Serializer
   has_many :users
   has_many :entries, serializer: EntrySerializer
 
+  def prize
+    object.prize.attributes
+  end
 end
