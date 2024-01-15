@@ -5,7 +5,7 @@ import Giveaways from './features/Giveaway/Giveaways';
 import GiveawayPage from './features/Giveaway/GiveawayPage';
 import Home from './features/Users/Home';
 import NavBar from './features/NavBar';
-import AdminDash from './features/AdminDash';
+import AdminDash from './features/Admin/AdminDash';
 import SignUp from './features/Auth/SignUp';
 import Login from './features/Auth/Login';
 import Logout from './features/Auth/Logout';

@@ -3,7 +3,7 @@ import { ClipLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGiveaways, deleteGiveaway, updateGiveaway } from '../Reducers/giveawaysSlice';
 import { fetchPrizes, updatePrize } from '../Reducers/PrizesSlice';
-import PickWinner from './PickWinner';
+import PickWinner from '../Giveaway/PickWinner';
 
 
 function AdminGiveaways() {

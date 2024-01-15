@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
-import AdminEntries from "./Entries/AdminEntries";
-import AdminGiveaways from "./Giveaway/AdminGiveaways";
+import AdminEntries from "./AdminEntries";
+import AdminGiveaways from "./AdminGiveaways";
 import AdminPrizes from "./AdminPrizes";
-import AdminUsers from "./Admin/AdminUsers";
-import CreateGiveaway from "./Giveaway/CreateGiveaway";
+import AdminUsers from "./AdminUsers";
+import CreateGiveaway from "../Giveaway/CreateGiveaway";
 import { useSelector } from "react-redux";
 
 function AdminDash() {
