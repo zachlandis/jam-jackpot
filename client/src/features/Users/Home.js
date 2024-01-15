@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
+import UserEntries from "./UserEntries";
+import UserPrizes from "./UserPrizes";
 
 function Home() { 
     const currentUser = useSelector((state) => state.users.currentUser);
@@ -15,44 +17,12 @@ function Home() {
     }
 
     return (
-    
         <div className="home-container">
             {currentUser ? (
                 <div>
                     <h1 className="welcome-header">Welcome, {currentUser.first_name}</h1>
-                    <div className="entries-section">
-                        <h2>Your Entries</h2>
-                        {currentUser.entries && currentUser.entries.length > 0 ? (
-                            <ul>
-                            {Array.from(new Set(currentUser.entries.map((entry) => entry.giveaway?.title))).map((title) => (
-                                <li key={title}>
-                                    <a href={`/giveaways/${currentUser.entries.find((entry) => entry.giveaway?.title === title).giveaway?.id}`}>
-                                        {title}
-                                    </a>
-                                </li>
-                            ))}
-                            </ul>
-                        ) : (
-                            <p>No entries found.</p>
-                        )}
-                    </div>
-
-                    <div className="prizes-section">
-                        <h2>Your Prizes</h2>
-                        {currentUser.prev_wins && currentUser.prev_wins.length > 0 ? (
-                            <ul>
-                            {currentUser.prev_wins.map((win) => (
-                                <li key={win.prize?.id}>
-                                    <a href={`/giveaways/${win.prize.giveaway?.id}`}>
-                                        {win.prize?.prize_name}
-                                    </a>
-                                </li>
-                            ))}
-                            </ul>
-                        ) : (
-                            <p>No prizes found.</p>
-                        )}
-                    </div>
+                    <UserEntries currentUser={currentUser}/>
+                    <UserPrizes currentUser={currentUser}/>
                 </div>
             ) : (
                 <h1>Please login to access this page</h1>
