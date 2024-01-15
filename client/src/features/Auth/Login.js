@@ -3,35 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadCurrentUser, loginUser } from '../Reducers/UsersSlice';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const errors = useSelector((state) => state.users.errors);
-  const currentUser = useSelector((state) => state.users.currentUser)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const user = await dispatch(loginUser({ email, password }));
-      if (user) {
-        if (currentUser) {
-          dispatch(loadCurrentUser())
-        }
-        navigate('/');
-      }
-    } catch (error) {
-      
-      console.error('Login error:', error);
+    const user = dispatch(loginUser({ email, password }));
+    
+    if (user) {
+      dispatch(loadCurrentUser());
+      navigate('/');
     }
-    setEmail('');
-    setPassword('');
   };
-
 
   return (
     <div className="login-container">
