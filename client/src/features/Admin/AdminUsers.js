@@ -46,7 +46,6 @@ function AdminUsers() {
     handleUpdate(userId);
   };
 
-
   if (loading) {
     return (
       <div className="loading-spinner-container">
@@ -57,10 +56,9 @@ function AdminUsers() {
     );
   }
 
-
   return (
     <div className="table-container">
-    <table className="table table-striped">
+      <table className="table table-striped">
         <thead className="table-header">
           <tr>
             <th>First Name</th>
@@ -81,22 +79,22 @@ function AdminUsers() {
                 {editableFields[user.id] ? (
                   <input
                     type="text"
-                    value={editedValues[user.id]?.first_name || `${user.first_name}`}
+                    value={editedValues[user.id]?.first_name || user.first_name}
                     onChange={(e) => handleInputChange(user.id, 'first_name', e.target.value)}
                   />
                 ) : (
-                  `${user.first_name}`
+                  user.first_name
                 )}
               </td>
               <td>
                 {editableFields[user.id] ? (
                   <input
                     type="text"
-                    value={editedValues[user.id]?.last_name || `${user.last_name} ${user.last_name}`}
+                    value={editedValues[user.id]?.last_name || user.last_name}
                     onChange={(e) => handleInputChange(user.id, 'last_name', e.target.value)}
                   />
                 ) : (
-                  `${user.last_name}`
+                  user.last_name
                 )}
               </td>
               <td>
@@ -122,7 +120,7 @@ function AdminUsers() {
                 )}
               </td>
               <td>
-              {editableFields[user.id] ? (
+                {editableFields[user.id] ? (
                   <input
                     type="text"
                     value={editedValues[user.id]?.user_city || user.user_city}
@@ -133,7 +131,7 @@ function AdminUsers() {
                 )}
               </td>
               <td>
-              {editableFields[user.id] ? (
+                {editableFields[user.id] ? (
                   <input
                     type="text"
                     value={editedValues[user.id]?.user_state || user.user_state}
@@ -142,34 +140,34 @@ function AdminUsers() {
                 ) : (
                   user.user_state
                 )}
-              </td>  
+              </td>
               <td>
-              {editableFields[user.id] ? (
-                <input
-                  type="checkbox"
-                  checked={editedValues[user.id]?.admin || user.admin}
-                  onChange={(e) => handleInputChange(user.id, 'admin', e.target.checked)}
-                />
-              ) : (
-                <input
-                  type="checkbox"
-                  disabled
-                  checked={user.admin}
-                />
-              )}
-            </td>
+                {editableFields[user.id] ? (
+                  <input
+                    type="checkbox"
+                    checked={editedValues[user.id]?.admin || user.admin}
+                    onChange={(e) => handleInputChange(user.id, 'admin', e.target.checked)}
+                  />
+                ) : (
+                  <input
+                    type="checkbox"
+                    disabled
+                    checked={user.admin}
+                  />
+                )}
+              </td>
               <td>
                 <div className="controls">
-                {editableFields[user.id] ? (
+                  {editableFields[user.id] ? (
                     <button onClick={() => handleSave(user.id)}>✅</button>
-                    ) : (
+                  ) : (
                     <button onClick={() => handleUpdate(user.id)}>✍️</button>
-                    )}
+                  )}
                 </div>
-            </td>
-            <td>
-            <button onClick={() => handleDelete(user.id)}>❌</button>
-            </td>
+              </td>
+              <td>
+                <button onClick={() => handleDelete(user.id)}>❌</button>
+              </td>
             </tr>
           ))}
         </tbody>
