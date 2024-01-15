@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./AdminEntries";
 import AdminGiveaways from "./AdminGiveaways";
-import AdminPrizes from "./AdminPrizes";
 import AdminUsers from "./AdminUsers";
 import CreateGiveaway from "../Giveaway/CreateGiveaway";
 import { useSelector } from "react-redux";
@@ -11,7 +10,6 @@ import { useSelector } from "react-redux";
 function AdminDash() {
     const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allGiveaways');
     const currentUser = useSelector((state) => state.users.currentUser);
-
 
     function onButtonClick(buttonName) {
         setActiveButton(buttonName);
@@ -40,12 +38,6 @@ function AdminDash() {
                 >
                     All Entries
                 </Button>
-                {/* <Button
-                    {activeButton === 'allPrizes' ? 'primary' : 'secondary'}
-                    onClick={() => onButtonClick('allPrizes')}
-                >
-                    All Prizes
-                </Button> */}
                 <Button
                     variant={activeButton === 'newGiveaway' ? 'primary' : 'secondary'}
                     onClick={() => onButtonClick('newGiveaway')}
@@ -55,7 +47,6 @@ function AdminDash() {
             </ButtonGroup>
             {activeButton === 'allGiveaways' && <AdminGiveaways />}
             {activeButton === 'allUsers' && <AdminUsers />}
-            {/* {activeButton === 'allPrizes' && <AdminPrizes />} */}
             {activeButton === 'allEntries' && <AdminEntries />}
             {activeButton === 'newGiveaway' && <CreateGiveaway />}
         </div>
