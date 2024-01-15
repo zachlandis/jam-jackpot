@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEntry } from '../Reducers/EntriesSlice';
 import { updateUser } from '../Reducers/UsersSlice';
-import { fetchEntries } from '../Reducers/EntriesSlice';
 
 function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByGiveaway }) {
   const [selectedWinner, setSelectedWinner] = useState('');
-  const [updatedEntries, setUpdatedEntries] = useState([]);
 
   const dispatch = useDispatch();
   const entries = useSelector((state) => state.entries.entities)?.filter(entry=> entry.giveaway.id === giveawayId);
   const giveaways = useSelector((state) => state.giveaways.entities);
   const currentGiveawayId = giveawayId; 
   const currentGiveaway = giveaways.find((giveaway) => giveaway.id === currentGiveawayId);
-
-  useEffect(() => {
-    dispatch(fetchEntries(currentGiveawayId));
-  }, [dispatch, currentGiveawayId]);
 
   const handleSelectWinner = () => {
     if (entries.length === 0) {
@@ -43,16 +37,23 @@ function PickWinner({ giveawayId, showPickWinnerByGiveaway, setShowPickWinnerByG
   };
 
   const handleMarkWinner = () => {
-    if (selectedWinner) {
-      console.log(selectedWinner)
+    if (selectedWinner && selectedWinner.entry.id) {
+      const prevWins = Array.isArray(selectedWinner.entry.user.prev_wins)
+        ? selectedWinner.entry.user.prev_wins
+        : [];
       dispatch(updateEntry({
         id: selectedWinner.entry.id, 
         winner: true,
-      }))
+      }));
+      const updatedUser = {
+        id: selectedWinner.randomWinnerId,
+        prev_wins: [...prevWins, currentGiveawayId],
+      };
+      dispatch(updateUser(updatedUser));
     }
   };
   
-    
+  
   return (
     <div className="pick-winner-container">
       <div className="column">
