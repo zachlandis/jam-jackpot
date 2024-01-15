@@ -10,24 +10,17 @@ import SignUp from './features/Users/SignUp';
 import Login from './features/Users/Login';
 import Logout from './features/Users/Logout';
 import { loadCurrentUser } from './features/Users/UsersSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function App() {
   const [page, setPage] = useState("/")
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const currentUser = useSelector((state) => state.users.currentUser)
-
-
   useEffect(() => {
     dispatch(loadCurrentUser())
     setLoading(false)
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log("currentUser:", currentUser);
-  }, [currentUser]);
   
   if (loading) {
     return <div>Loading...</div>
