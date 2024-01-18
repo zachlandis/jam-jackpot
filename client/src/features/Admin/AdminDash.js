@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import AdminEntries from "./AdminEntries";
 import AdminGiveaways from "./AdminGiveaways";
 import AdminUsers from "./AdminUsers";
-import CreateGiveaway from "../Giveaway/CreateGiveaway";
+import CreateGiveaway from "./CreateGiveaway";
 import { useSelector } from "react-redux";
 
 function AdminDash() {

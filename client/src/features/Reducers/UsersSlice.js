@@ -68,7 +68,7 @@ export const loginUser = createAsyncThunk("users/loginUser", async (userData) =>
       body: JSON.stringify(userData),
     });
     if (!response.ok) {
-      const errorMessage = await response.text(); // Get the error message from the response
+      const errorMessage = await response.text();
       console.error('Login failed:', errorMessage);
       throw new Error("Failed to login");
     }
@@ -85,11 +85,13 @@ export const loginUser = createAsyncThunk("users/loginUser", async (userData) =>
 export const loadCurrentUser = createAsyncThunk(
   "users/loadCurrentUser",
   async () => {
+    console.log("From slice, initate load current user")
     const response = await fetch("/current_user_info"); 
     if (!response.ok) {
       throw new Error("Failed to load current user");
     }
     const user = await response.json();
+    console.log(user)
     return user;
   }
 );
