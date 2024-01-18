@@ -22,3 +22,4 @@ function UserPrizes({ currentUser }) {
 }
 
 export default UserPrizes;
+
