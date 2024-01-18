@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { logoutUser } from "./Reducers/UsersSlice";
 import { Link } from "react-router-dom";
 import "../index.css";
@@ -11,47 +11,45 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("Logging out..."); 
+    console.log("Logging out...");
     dispatch(logoutUser()).then(() => {
       navigate('/login');
     });
   };
 
-  console.log()
-
   return (
     <nav className="navbar">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Jam Jackpot
+          Win Concert Tickets
         </Link>
 
-        {Object.keys(currentUser).length !== 0 ? ( 
-        <div className="navbar-links">
-          <ul className="nav-list">
-              <>
+        {Object.keys(currentUser).length !== 0 && (
+          <div className="navbar-links">
+            <ul className="nav-list">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/giveaways">
+                  Giveaways
+                </Link>
+              </li>
+              {currentUser?.admin && (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/giveaways">
-                    Giveaways
-                  </Link>
-                </li>
-                {currentUser?.admin && <li className="nav-item">
                   <Link className="nav-link" to="/admin">
                     Admin
                   </Link>
-                </li>}
-              </>
-          </ul>
-        </div>
-            ) : null}
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
 
         <div className="user-dropdown">
-          {Object.keys(currentUser).length !== 0 ? ( 
+          {Object.keys(currentUser).length !== 0 ? (
             <div className="user-menu">
               <span className="user-name">
                 {currentUser.first_name} {currentUser.last_name}
@@ -60,7 +58,7 @@ function NavBar() {
                 Logout
               </button>
             </div>
-          ) : ( 
+          ) : (
             <div className="auth-links">
               <Link className="nav-link" to="/users/new">
                 Sign Up
