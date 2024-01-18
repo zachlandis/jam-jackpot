@@ -5,8 +5,8 @@ import { fetchGiveaways } from '../Reducers/giveawaysSlice';
 
 function GiveawayList() {
   const giveaways = useSelector((state) => state.giveaways.entities);
-  
-  function formatDate(dateString) {
+
+  const formatDate = (dateString) => {
     const options = {
       weekday: 'long',
       month: 'long',
@@ -15,11 +15,8 @@ function GiveawayList() {
     };
     const utcDate = new Date(dateString);
     const localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
-
     return localDate.toLocaleDateString(undefined, options);
-  }
-
-
+  };
 
   const giveawayElements = giveaways?.map((giveaway) => {
     const formattedDate = formatDate(giveaway.event_date);
@@ -29,7 +26,7 @@ function GiveawayList() {
         <div className='giveawayList-div'>
           <div className="column">
             <h2>{giveaway.title}</h2>
-            <p><strong>Date:</strong> {giveaway.event_date}</p>
+            <p><strong>Date:</strong> {formattedDate}</p>
             <p><strong>Venue:</strong> {giveaway.event_venue}</p>
             <p><strong>Location:</strong> {giveaway.event_location}</p>
             <p><strong>Prize:</strong> {giveaway.prize.number_of_tickets} tickets</p>
