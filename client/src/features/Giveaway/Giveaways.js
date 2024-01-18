@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGiveaways } from '../Reducers/giveawaysSlice';
 import { ClipLoader } from 'react-spinners';
@@ -6,12 +6,11 @@ import GiveawayList from './GiveawayList';
 
 function Giveaways() {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.giveaways.status === 'loading');
 
   useEffect(() => {
     dispatch(fetchGiveaways());
   }, []);
-  
-  const loading = useSelector((state) => state.giveaways.status === 'loading');
 
   if (loading) {
     return (
